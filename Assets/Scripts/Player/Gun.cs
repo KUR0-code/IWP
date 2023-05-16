@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class Gun : MonoBehaviour
 {
     public Camera cam;
-    private InputManager inputManager;
 
     [SerializeField]
     float range = 50f;
@@ -39,7 +38,6 @@ public class Gun : MonoBehaviour
 
     void Awake()
     {
-        inputManager = GetComponent<InputManager>();
         rapidFireWait = new WaitForSeconds(1 / fireRate);
         currentAmmo = maxAmmo;
         reloadWait = new WaitForSeconds(reloadTime);
@@ -49,8 +47,6 @@ public class Gun : MonoBehaviour
     {
         currentAmmo--;
         ShootingSystem.Play();
-
-        //Vector3 direction = GetDirection();
 
         if (Physics.Raycast(BulletSpawnPoint.position, cam.transform.forward, out RaycastHit hit, (int) range))
         {

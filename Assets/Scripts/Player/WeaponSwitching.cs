@@ -17,7 +17,7 @@ public class WeaponSwitching : MonoBehaviour {
     private int selectedWeapon;
     private float timeSinceLastSwitch;
 
-    private void Start() {
+    private void Awake() {
         SetWeapons();
         Select(selectedWeapon);
 
