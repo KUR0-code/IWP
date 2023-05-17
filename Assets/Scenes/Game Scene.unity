@@ -509,21 +509,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4999107168733169125, guid: 2bf73fbaf558a2a47a117b8b11ddfe2a, type: 3}
   m_PrefabInstance: {fileID: 4746983560983906623}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &146259720
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 146259686}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96910d286c8d4134781406fd2d2f2a82, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weapons: []
-  keys: 
-  switchTime: 0
 --- !u!1001 &212267789
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3779,11 +3764,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 365018295}
-  range: 35
   damage: 10
   fireRate: 5
   rapidFire: 0
+  isMelee: 0
   maxAmmo: 15
+  currentAmmo: 0
   reloadTime: 2
   BulletSpawnPoint: {fileID: 634557567}
   trailRenderer: {fileID: 596389542458507957, guid: 48abbfe8cdcc51741b2778183c4ac479, type: 3}
@@ -4202,11 +4188,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 365018295}
-  range: 50
   damage: 25
   fireRate: 7
   rapidFire: 1
+  isMelee: 0
   maxAmmo: 30
+  currentAmmo: 0
   reloadTime: 3
   BulletSpawnPoint: {fileID: 663795047}
   trailRenderer: {fileID: 596389542458507957, guid: 48abbfe8cdcc51741b2778183c4ac479, type: 3}
@@ -4605,9 +4592,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapons:
-  - {fileID: 1047897674}
-  - {fileID: 1032889946}
   - {fileID: 1247317321}
+  - {fileID: 1032889946}
+  - {fileID: 1047897674}
   keys: 310000003200000033000000
   switchTime: 0
 --- !u!1 &1417962279
@@ -5833,6 +5820,10 @@ PrefabInstance:
       propertyPath: gun
       value: 
       objectReference: {fileID: 1247317320}
+    - target: {fileID: 4746983560859563987, guid: 2bf73fbaf558a2a47a117b8b11ddfe2a, type: 3}
+      propertyPath: weaponholder
+      value: 
+      objectReference: {fileID: 1398567994}
     - target: {fileID: 4746983560859563987, guid: 2bf73fbaf558a2a47a117b8b11ddfe2a, type: 3}
       propertyPath: ShootingSystem
       value: 

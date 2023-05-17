@@ -14,7 +14,7 @@ public class WeaponSwitching : MonoBehaviour {
     [Header("Settings")]
     [SerializeField] private float switchTime;
 
-    private int selectedWeapon;
+    private int selectedWeapon = 0;
     private float timeSinceLastSwitch;
 
     private void Awake() {
@@ -25,30 +25,34 @@ public class WeaponSwitching : MonoBehaviour {
     }
 
     private void SetWeapons() {
-        weapons = new Transform[transform.childCount];
-
-        for (int i = 0; i < transform.childCount; i++)
-            weapons[i] = transform.GetChild(i);
-
-        if (keys == null) keys = new KeyCode[weapons.Length];
-    }
-
-    private void Update() {
-        int previousSelectedWeapon = selectedWeapon;
-
         for (int i = 0; i < keys.Length; i++)
-            if (Input.GetKeyDown(keys[i]) && timeSinceLastSwitch >= switchTime)
+        {
+            if (Input.GetKeyDown(keys[i]) && selectedWeapon != i && timeSinceLastSwitch >= switchTime)
+            {
                 selectedWeapon = i;
-
-        if (previousSelectedWeapon != selectedWeapon) Select(selectedWeapon);
-
+                Select(selectedWeapon);
+            }
+        }
+    }
+    public Transform GetWeapon()
+    {
+        return transform.GetChild(selectedWeapon);
+    }
+    private void Update() {
+        
         timeSinceLastSwitch += Time.deltaTime;
+        SetWeapons();
     }
 
     private void Select(int weaponIndex) {
         for (int i = 0; i < weapons.Length; i++)
-            weapons[i].gameObject.SetActive(i == weaponIndex);
+        {
+            if (i == weaponIndex)
+                transform.GetChild(i).gameObject.SetActive(true);
+            else
+                transform.GetChild(i).gameObject.SetActive(false);
 
+        }
         timeSinceLastSwitch = 0f;
 
         OnWeaponSelected();

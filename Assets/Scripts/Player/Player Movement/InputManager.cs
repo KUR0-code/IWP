@@ -12,7 +12,8 @@ public class InputManager : MonoBehaviour
     private PlayerLook look;
     [SerializeField]
     Gun gun;
-
+    [SerializeField]
+    private GameObject weaponholder;
 
     Coroutine fireCoroutine;
     [SerializeField]
@@ -58,6 +59,7 @@ public class InputManager : MonoBehaviour
 
     void startFiring()
     {
+        gun = weaponholder.GetComponent<WeaponSwitching>().GetWeapon().GetComponent<Gun>();
         fireCoroutine = StartCoroutine(gun.RapidFire());
     }
 
@@ -66,7 +68,7 @@ public class InputManager : MonoBehaviour
         if(fireCoroutine != null)
         {
             StopCoroutine(fireCoroutine);
-            ShootingSystem.Stop();
+            //ShootingSystem.Stop();
         }
     }
 }

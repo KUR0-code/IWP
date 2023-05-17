@@ -9,8 +9,6 @@ public class Gun : MonoBehaviour
     public Camera cam;
 
     [SerializeField]
-    float range = 50f;
-    [SerializeField]
     float damage = 10f;
 
     [SerializeField]
@@ -21,7 +19,11 @@ public class Gun : MonoBehaviour
     bool rapidFire = false;
 
     [SerializeField]
+    bool isMelee = true;
+
+    [SerializeField]
     int maxAmmo;
+    [SerializeField]
     int currentAmmo;
 
     [SerializeField]
@@ -45,22 +47,34 @@ public class Gun : MonoBehaviour
 
     public void shoot()
     {
-        currentAmmo--;
-        ShootingSystem.Play();
-
-        if (Physics.Raycast(BulletSpawnPoint.position, cam.transform.forward, out RaycastHit hit, (int) range))
+        // the weapon the player is holding is a gun
+        if(!isMelee)
         {
-            TrailRenderer trail = Instantiate(trailRenderer, BulletSpawnPoint.position, Quaternion.identity);
-            StartCoroutine(SpawnTrail(trail, hit));
-            if (hit.collider.GetComponent<Damageable>() != null)
-            { 
-                if(hit.collider.tag == "Dragon")
+            currentAmmo--;
+            ShootingSystem.Play();
+
+            if (Physics.Raycast(BulletSpawnPoint.position, cam.transform.forward, out RaycastHit hit))
+            {
+                TrailRenderer trail = Instantiate(trailRenderer, BulletSpawnPoint.position, Quaternion.identity);
+                StartCoroutine(SpawnTrail(trail, hit));
+                if (hit.collider.GetComponent<Damageable>() != null)
                 {
-                    hit.collider.GetComponent<Damageable>().takeDamage(damage, hit.point, hit.normal);
+                    if (hit.collider.tag == "Dragon")
+                    {
+                        hit.collider.GetComponent<Damageable>().takeDamage(damage, hit.point, hit.normal);
+                    }
                 }
+
             }
-          
+            StartCoroutine(StopShooting(0.1f));
         }
+        else // weapon is a melee
+        {
+
+        }
+       
+
+
     }
    
     private IEnumerator SpawnTrail(TrailRenderer trail, RaycastHit hit)
@@ -117,8 +131,13 @@ public class Gun : MonoBehaviour
         }
         else
         {
-            ShootingSystem.Stop();
             return false;
         } 
+    }
+
+    IEnumerator StopShooting(float time)
+    {
+        yield return new WaitForSeconds(time);
+        ShootingSystem.Stop();
     }
 }
