@@ -70,9 +70,8 @@ public class Gun : MonoBehaviour
         }
         else // weapon is a melee
         {
-
+            
         }
-       
 
 
     }
