@@ -25,6 +25,7 @@ public class LevelSystem : MonoBehaviour
     [Range(7f, 14f)]
     public float divisionMultiplier = 2;
 
+    GameObject Dragon;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,17 +33,20 @@ public class LevelSystem : MonoBehaviour
         backXpBar.fillAmount = currentXP / requiredXP;
         requiredXP = RequiredXp();
         levelText.text = "Level " + level;
+        Dragon = GameObject.FindGameObjectWithTag("Dragon");
     }
 
     // Update is called once per frame
     void Update()
     {
         UpdateXpUI();
-        if(Input.GetKeyDown(KeyCode.C))
+
+        if(Dragon.GetComponent<Damageable>().died)
         {
             GainExpRate(20);
+            Dragon.GetComponent<Damageable>().died = false;
         }
-        if(currentXP > requiredXP)
+        if (currentXP > requiredXP)
         {
             LevelUp();
         }

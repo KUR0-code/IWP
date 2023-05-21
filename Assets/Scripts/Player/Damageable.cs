@@ -10,7 +10,8 @@ public class Damageable : MonoBehaviour
     public float CurrentHp;
     [SerializeField]
     GameObject hitEffect;
-
+    [SerializeField]
+    public bool died = false;
     public Animator Animator;
     // Start is called before the first frame update
     void Awake()
@@ -30,14 +31,17 @@ public class Damageable : MonoBehaviour
         else
         {
             Animator.SetTrigger("Damage");
+            died = false;
             // stun lock 
         }
     }
 
-    void Die()
+    public void Die()
     {
         print(name + " was destroyed");
         Animator.SetTrigger("Die");
         GetComponent<Collider>().enabled = false;
+        died = true;
+
     }
 }

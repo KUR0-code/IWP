@@ -462,6 +462,7 @@ MonoBehaviour:
   CurrentHp: 0
   hitEffect: {fileID: 100002, guid: ba261927bb2ae4244b20b0eb77a96415, type: 3}
   Animator: {fileID: 0}
+  hasDied: 1
 --- !u!1 &146259686 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4746983560859563993, guid: 2bf73fbaf558a2a47a117b8b11ddfe2a, type: 3}
@@ -509,6 +510,7 @@ MonoBehaviour:
   additionMultiplier: 300
   powerMultiplier: 2
   divisionMultiplier: 2
+  Dragon: {fileID: 1562694766}
 --- !u!4 &146259711 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4999107168733169125, guid: 2bf73fbaf558a2a47a117b8b11ddfe2a, type: 3}
@@ -1078,6 +1080,7 @@ MonoBehaviour:
   CurrentHp: 0
   hitEffect: {fileID: 100002, guid: ba261927bb2ae4244b20b0eb77a96415, type: 3}
   Animator: {fileID: 0}
+  hasDied: 1
 --- !u!114 &429106149
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1659,6 +1662,7 @@ MonoBehaviour:
   CurrentHp: 0
   hitEffect: {fileID: 100002, guid: ba261927bb2ae4244b20b0eb77a96415, type: 3}
   Animator: {fileID: 0}
+  hasDied: 1
 --- !u!1 &752978016
 GameObject:
   m_ObjectHideFlags: 0
@@ -1773,6 +1777,7 @@ MonoBehaviour:
   CurrentHp: 0
   hitEffect: {fileID: 100002, guid: ba261927bb2ae4244b20b0eb77a96415, type: 3}
   Animator: {fileID: 0}
+  hasDied: 1
 --- !u!1 &753633515
 GameObject:
   m_ObjectHideFlags: 0
@@ -3893,6 +3898,7 @@ MonoBehaviour:
   CurrentHp: 0
   hitEffect: {fileID: 100002, guid: ba261927bb2ae4244b20b0eb77a96415, type: 3}
   Animator: {fileID: 0}
+  hasDied: 1
 --- !u!1001 &1040564350
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4837,6 +4843,7 @@ MonoBehaviour:
   CurrentHp: 0
   hitEffect: {fileID: 100002, guid: ba261927bb2ae4244b20b0eb77a96415, type: 3}
   Animator: {fileID: 0}
+  hasDied: 1
 --- !u!1001 &1528424037
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4932,6 +4939,7 @@ MonoBehaviour:
   CurrentHp: 0
   hitEffect: {fileID: 100002, guid: f04e15e9b0b32f24b9e87868e8bfbeea, type: 3}
   Animator: {fileID: 1562694774}
+  hasDied: 1
 --- !u!136 &1562694770
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -5237,6 +5245,7 @@ MonoBehaviour:
   CurrentHp: 0
   hitEffect: {fileID: 100002, guid: ba261927bb2ae4244b20b0eb77a96415, type: 3}
   Animator: {fileID: 0}
+  hasDied: 1
 --- !u!114 &1611766631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5729,6 +5738,7 @@ MonoBehaviour:
   CurrentHp: 0
   hitEffect: {fileID: 100002, guid: ba261927bb2ae4244b20b0eb77a96415, type: 3}
   Animator: {fileID: 0}
+  hasDied: 1
 --- !u!1 &2087823383
 GameObject:
   m_ObjectHideFlags: 0
