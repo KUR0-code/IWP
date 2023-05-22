@@ -24,16 +24,16 @@ public class LevelSystem : MonoBehaviour
     public float powerMultiplier = 2;
     [Range(7f, 14f)]
     public float divisionMultiplier = 2;
-
-    GameObject Dragon;
+    [SerializeField]
+    GameObject Enemy;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         frontXpBar.fillAmount = currentXP / requiredXP;
         backXpBar.fillAmount = currentXP / requiredXP;
         requiredXP = RequiredXp();
         levelText.text = "Level " + level;
-        Dragon = GameObject.FindGameObjectWithTag("Dragon");
+        Enemy = GameObject.FindGameObjectWithTag("Dragon");
     }
 
     // Update is called once per frame
@@ -41,10 +41,12 @@ public class LevelSystem : MonoBehaviour
     {
         UpdateXpUI();
 
-        if(Dragon.GetComponent<Damageable>().died)
+        if (Enemy.GetComponent<Damageable>().died)
         {
             GainExpRate(20);
-            Dragon.GetComponent<Damageable>().died = false;
+
+            Enemy.GetComponent<Damageable>().died = false;
+            Debug.Log("xp gained");
         }
         if (currentXP > requiredXP)
         {

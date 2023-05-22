@@ -17,10 +17,12 @@ public class Damageable : MonoBehaviour
     void Awake()
     {
         CurrentHp = maxHp;
+        died = false;
     }
 
     public void takeDamage(float damage, Vector3 HitPos, Vector3 HitNormal)
     {
+        // Debug.Log(died);
         Instantiate(hitEffect, HitPos, Quaternion.LookRotation(HitNormal));
         CurrentHp -= damage;
         if(CurrentHp <= 0 )
@@ -31,7 +33,6 @@ public class Damageable : MonoBehaviour
         else
         {
             Animator.SetTrigger("Damage");
-            died = false;
             // stun lock 
         }
     }
@@ -42,6 +43,5 @@ public class Damageable : MonoBehaviour
         Animator.SetTrigger("Die");
         GetComponent<Collider>().enabled = false;
         died = true;
-
     }
 }

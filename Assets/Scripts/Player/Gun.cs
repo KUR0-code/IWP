@@ -20,6 +20,7 @@ public class Gun : MonoBehaviour
 
     [SerializeField]
     bool isMelee = true;
+    public bool hasMelee = false;
 
     [SerializeField]
     int maxAmmo;
@@ -37,6 +38,7 @@ public class Gun : MonoBehaviour
 
     [SerializeField]
     private ParticleSystem ShootingSystem;
+
 
     void Awake()
     {
@@ -70,10 +72,8 @@ public class Gun : MonoBehaviour
         }
         else // weapon is a melee
         {
-            
+            hasMelee = true;
         }
-
-
     }
    
     private IEnumerator SpawnTrail(TrailRenderer trail, RaycastHit hit)
