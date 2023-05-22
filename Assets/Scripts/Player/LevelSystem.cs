@@ -43,10 +43,8 @@ public class LevelSystem : MonoBehaviour
 
         if (Enemy.GetComponent<Damageable>().died)
         {
-            GainExpRate(20);
-
             Enemy.GetComponent<Damageable>().died = false;
-            Debug.Log("xp gained");
+            //Debug.Log("xp gained");
         }
         if (currentXP > requiredXP)
         {

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Gun : MonoBehaviour
 {
-    public Camera cam;
+    Camera cam;
 
     [SerializeField]
     float damage = 10f;
@@ -45,6 +45,7 @@ public class Gun : MonoBehaviour
         rapidFireWait = new WaitForSeconds(1 / fireRate);
         currentAmmo = maxAmmo;
         reloadWait = new WaitForSeconds(reloadTime);
+        cam = Camera.main;
     }
 
     public void shoot()

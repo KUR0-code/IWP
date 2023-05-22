@@ -13,6 +13,13 @@ public class Damageable : MonoBehaviour
     [SerializeField]
     public bool died = false;
     public Animator Animator;
+
+    GameObject player;
+
+    private void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
     // Start is called before the first frame update
     void Awake()
     {
@@ -43,5 +50,8 @@ public class Damageable : MonoBehaviour
         Animator.SetTrigger("Die");
         GetComponent<Collider>().enabled = false;
         died = true;
+
+        // Dragon EXP
+        player.GetComponent<LevelSystem>().GainExpRate(10);
     }
 }
