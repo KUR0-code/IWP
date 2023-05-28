@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+
 public class LevelSystem : MonoBehaviour
 {
     public int level;
@@ -64,7 +65,7 @@ public class LevelSystem : MonoBehaviour
             {
                 lerpTimer += Time.deltaTime;
                 float percentComplete = lerpTimer / 4;
-                frontXpBar.fillAmount = Mathf.Lerp(FrontXp, backXpBar.fillAmount, percentComplete);
+                // frontXpBar.fillAmount = Mathf.Lerp(FrontXp, backXpBar.fillAmount, percentComplete);
             }
         }
         XpText.text = currentXP + "/" + requiredXP;
