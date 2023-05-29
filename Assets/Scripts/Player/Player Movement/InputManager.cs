@@ -30,8 +30,10 @@ public class InputManager : MonoBehaviour
         movement = GetComponent<PlayerMovement>();
         look = GetComponent<PlayerLook>();
         SettingUI = GameObject.FindGameObjectWithTag("Settings");
+        SettingUI.gameObject.SetActive(false);
 
-                                // ctx is call back context works like a pointer.
+
+        // ctx is call back context works like a pointer.
         walking.Jump.performed += ctx => movement.Jump();
         walking.Crouch.performed += ctx => movement.Crouch();
         walking.Sprint.performed += ctx => movement.Sprint();
@@ -53,16 +55,30 @@ public class InputManager : MonoBehaviour
         look.ProcessLook(walking.Look.ReadValue<Vector2>()); 
     }
 
+
+    public void RemoveCursor()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
     private void UnlockCursor()
     {
         toggle = !toggle;
         Debug.Log(toggle);
         if (toggle)
+        {
             SettingUI.gameObject.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
 
+        }
         else
+        {
             SettingUI.gameObject.SetActive(false);
-
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
     }
 
     private void OnEnable()
