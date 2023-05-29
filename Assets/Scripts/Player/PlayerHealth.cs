@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -32,14 +33,17 @@ public class PlayerHealth : MonoBehaviour
     void Update()
     {
         health = Mathf.Clamp(health, 0, maxHealth);
-        updateHealthUI();  
-        if(overlay.color.a > 0)
+        updateHealthUI();
+        if (overlay.color.a > 0)
         {
-            if(health < 30)
+            if (health < 30)
+            {
                 return;
-            
+            }
+           
+
             durationTimer += Time.deltaTime;
-            if(durationTimer > duration)
+            if (durationTimer > duration)
             {
                 // fade the image
                 float tempAlpha = overlay.color.a;
@@ -47,6 +51,8 @@ public class PlayerHealth : MonoBehaviour
                 overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, tempAlpha);
             }
         }
+
+        
     }
 
     public void updateHealthUI()
@@ -78,6 +84,12 @@ public class PlayerHealth : MonoBehaviour
         }
 
         healthText.text = Mathf.Round(health) + "/" + Mathf.Round(maxHealth);
+
+        if (health <= 0)
+        {
+            Debug.Log("player died");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
     }
 
     public void TakeDamage(float damage)

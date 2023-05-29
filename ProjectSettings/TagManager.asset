@@ -8,6 +8,7 @@ TagManager:
   - FxTemporaire
   - Dragon
   - Door
+  - Settings
   layers:
   - Default
   - TransparentFX

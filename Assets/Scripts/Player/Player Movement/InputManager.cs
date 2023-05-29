@@ -18,6 +18,10 @@ public class InputManager : MonoBehaviour
     Coroutine fireCoroutine;
     [SerializeField]
     private ParticleSystem ShootingSystem;
+
+    public GameObject SettingUI;
+    bool toggle = false; 
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -25,6 +29,7 @@ public class InputManager : MonoBehaviour
         walking = playerInput.Walking;
         movement = GetComponent<PlayerMovement>();
         look = GetComponent<PlayerLook>();
+        SettingUI = GameObject.FindGameObjectWithTag("Settings");
 
                                 // ctx is call back context works like a pointer.
         walking.Jump.performed += ctx => movement.Jump();
@@ -32,6 +37,7 @@ public class InputManager : MonoBehaviour
         walking.Sprint.performed += ctx => movement.Sprint();
         walking.Shoot.started += _ => startFiring();
         walking.Shoot.canceled += _ => stopFiring();
+        walking.Settings.performed += _ => UnlockCursor();
     }
 
     // Update is called once per frame
@@ -45,6 +51,18 @@ public class InputManager : MonoBehaviour
     {
         // move using the value of movement actions
         look.ProcessLook(walking.Look.ReadValue<Vector2>()); 
+    }
+
+    private void UnlockCursor()
+    {
+        toggle = !toggle;
+        Debug.Log(toggle);
+        if (toggle)
+            SettingUI.gameObject.SetActive(true);
+
+        else
+            SettingUI.gameObject.SetActive(false);
+
     }
 
     private void OnEnable()
@@ -71,4 +89,6 @@ public class InputManager : MonoBehaviour
             //ShootingSystem.Stop();
         }
     }
+
+
 }
