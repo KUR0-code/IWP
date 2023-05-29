@@ -11,6 +11,9 @@ public class PlayerInteract : MonoBehaviour
     private LayerMask mask;
     private PlayerUI playerUI;
     private InputManager inputManager;
+
+    public InventoryObject inventory;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,8 +41,19 @@ public class PlayerInteract : MonoBehaviour
                 if (inputManager.walking.Interact.triggered)
                 { 
                     interactable.BaseInteract();
+                    var item = Hit.collider.GetComponent<Item>();
+                    if (item)
+                    {
+                        inventory.AddItem(item.item, 1);
+                        Destroy(Hit.collider.GetComponent<Item>().gameObject);
+                    }
                 }
             }
         }
+    }
+
+    private void OnApplicationQuit()
+    {
+        inventory.Container.Clear();
     }
 }
