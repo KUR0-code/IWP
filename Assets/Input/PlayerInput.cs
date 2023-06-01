@@ -107,6 +107,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Inventory"",
+                    ""type"": ""Button"",
+                    ""id"": ""21ac9c5b-5c73-4de7-a9b5-4994e0a98f5b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -272,6 +281,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Settings"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8e5c1226-9476-4025-8a4c-423c9002e8c6"",
+                    ""path"": ""<Keyboard>/b"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Inventory"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -807,6 +827,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Walking_Shoot = m_Walking.FindAction("Shoot", throwIfNotFound: true);
         m_Walking_SwapWeapon = m_Walking.FindAction("SwapWeapon", throwIfNotFound: true);
         m_Walking_Settings = m_Walking.FindAction("Settings", throwIfNotFound: true);
+        m_Walking_Inventory = m_Walking.FindAction("Inventory", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -889,6 +910,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Walking_Shoot;
     private readonly InputAction m_Walking_SwapWeapon;
     private readonly InputAction m_Walking_Settings;
+    private readonly InputAction m_Walking_Inventory;
     public struct WalkingActions
     {
         private @PlayerInput m_Wrapper;
@@ -902,6 +924,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @Shoot => m_Wrapper.m_Walking_Shoot;
         public InputAction @SwapWeapon => m_Wrapper.m_Walking_SwapWeapon;
         public InputAction @Settings => m_Wrapper.m_Walking_Settings;
+        public InputAction @Inventory => m_Wrapper.m_Walking_Inventory;
         public InputActionMap Get() { return m_Wrapper.m_Walking; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -938,6 +961,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Settings.started += instance.OnSettings;
             @Settings.performed += instance.OnSettings;
             @Settings.canceled += instance.OnSettings;
+            @Inventory.started += instance.OnInventory;
+            @Inventory.performed += instance.OnInventory;
+            @Inventory.canceled += instance.OnInventory;
         }
 
         private void UnregisterCallbacks(IWalkingActions instance)
@@ -969,6 +995,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Settings.started -= instance.OnSettings;
             @Settings.performed -= instance.OnSettings;
             @Settings.canceled -= instance.OnSettings;
+            @Inventory.started -= instance.OnInventory;
+            @Inventory.performed -= instance.OnInventory;
+            @Inventory.canceled -= instance.OnInventory;
         }
 
         public void RemoveCallbacks(IWalkingActions instance)
@@ -1115,6 +1144,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnShoot(InputAction.CallbackContext context);
         void OnSwapWeapon(InputAction.CallbackContext context);
         void OnSettings(InputAction.CallbackContext context);
+        void OnInventory(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62b0102440ca4eb459768c51b41799b1, type: 3}
   m_Name: gloves
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
+  prefab: {fileID: 8223207655442445220, guid: c12b096d078621848a0aba276ac46db4, type: 3}
   type: 1
   description: 
   atkBonus: 10

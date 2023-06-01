@@ -20,7 +20,11 @@ public class InputManager : MonoBehaviour
     private ParticleSystem ShootingSystem;
 
     public GameObject SettingUI;
-    bool toggle = false; 
+
+    public GameObject inventoryUI;
+    bool CursorToggle = false;
+    bool toggle = false;
+
 
     // Start is called before the first frame update
     void Awake()
@@ -31,7 +35,8 @@ public class InputManager : MonoBehaviour
         look = GetComponent<PlayerLook>();
         SettingUI = GameObject.FindGameObjectWithTag("Settings");
         SettingUI.gameObject.SetActive(false);
-
+        inventoryUI = GameObject.FindGameObjectWithTag("Inventory");
+        inventoryUI.gameObject.SetActive(false);
 
         // ctx is call back context works like a pointer.
         walking.Jump.performed += ctx => movement.Jump();
@@ -40,6 +45,7 @@ public class InputManager : MonoBehaviour
         walking.Shoot.started += _ => startFiring();
         walking.Shoot.canceled += _ => stopFiring();
         walking.Settings.performed += _ => UnlockCursor();
+        walking.Inventory.performed += _ => InventoryUI();
     }
 
     // Update is called once per frame
@@ -55,18 +61,21 @@ public class InputManager : MonoBehaviour
         look.ProcessLook(walking.Look.ReadValue<Vector2>()); 
     }
 
-
-    public void RemoveCursor()
+    private void InventoryUI()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        toggle = !toggle;
+        Debug.Log(toggle);
+        if(toggle)
+            inventoryUI.gameObject.SetActive(true);
+        else
+            inventoryUI.gameObject.SetActive(false);
+
     }
 
     private void UnlockCursor()
     {
-        toggle = !toggle;
-        Debug.Log(toggle);
-        if (toggle)
+        CursorToggle = !CursorToggle;
+        if (CursorToggle)
         {
             SettingUI.gameObject.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
@@ -76,7 +85,6 @@ public class InputManager : MonoBehaviour
         else
         {
             SettingUI.gameObject.SetActive(false);
-            Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
     }
