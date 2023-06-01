@@ -56,4 +56,19 @@ public class displayInventory : MonoBehaviour
     {
         return new Vector3(xStart + (X_SpaceBetweenitems * (i % Column)), yStart + (-Y_SpaceBetweenitems * (i / Column)), 0f);
     }
+
+    public GameObject FindItem()
+    {
+        for (int i = 0; i < inventory.Container.Count; i++)
+        {
+            if (itemsDisplayed.ContainsKey(inventory.Container[i]))
+            {
+                if (itemsDisplayed[inventory.Container[i]].GetComponent<HealingPotion>() != null)
+                {
+                    return itemsDisplayed[inventory.Container[i]];
+                }
+            }
+        }
+        return null;
+    }
 }

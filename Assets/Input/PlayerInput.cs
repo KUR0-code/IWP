@@ -116,6 +116,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""EatFood"",
+                    ""type"": ""Button"",
+                    ""id"": ""84064ced-99c4-47bf-9574-16badf7f5f77"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -292,6 +301,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7e57e34c-b4ec-4e22-b897-2391a934755e"",
+                    ""path"": ""<Keyboard>/f2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EatFood"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -828,6 +848,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Walking_SwapWeapon = m_Walking.FindAction("SwapWeapon", throwIfNotFound: true);
         m_Walking_Settings = m_Walking.FindAction("Settings", throwIfNotFound: true);
         m_Walking_Inventory = m_Walking.FindAction("Inventory", throwIfNotFound: true);
+        m_Walking_EatFood = m_Walking.FindAction("EatFood", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -911,6 +932,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Walking_SwapWeapon;
     private readonly InputAction m_Walking_Settings;
     private readonly InputAction m_Walking_Inventory;
+    private readonly InputAction m_Walking_EatFood;
     public struct WalkingActions
     {
         private @PlayerInput m_Wrapper;
@@ -925,6 +947,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @SwapWeapon => m_Wrapper.m_Walking_SwapWeapon;
         public InputAction @Settings => m_Wrapper.m_Walking_Settings;
         public InputAction @Inventory => m_Wrapper.m_Walking_Inventory;
+        public InputAction @EatFood => m_Wrapper.m_Walking_EatFood;
         public InputActionMap Get() { return m_Wrapper.m_Walking; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -964,6 +987,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Inventory.started += instance.OnInventory;
             @Inventory.performed += instance.OnInventory;
             @Inventory.canceled += instance.OnInventory;
+            @EatFood.started += instance.OnEatFood;
+            @EatFood.performed += instance.OnEatFood;
+            @EatFood.canceled += instance.OnEatFood;
         }
 
         private void UnregisterCallbacks(IWalkingActions instance)
@@ -998,6 +1024,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Inventory.started -= instance.OnInventory;
             @Inventory.performed -= instance.OnInventory;
             @Inventory.canceled -= instance.OnInventory;
+            @EatFood.started -= instance.OnEatFood;
+            @EatFood.performed -= instance.OnEatFood;
+            @EatFood.canceled -= instance.OnEatFood;
         }
 
         public void RemoveCallbacks(IWalkingActions instance)
@@ -1145,6 +1174,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnSwapWeapon(InputAction.CallbackContext context);
         void OnSettings(InputAction.CallbackContext context);
         void OnInventory(InputAction.CallbackContext context);
+        void OnEatFood(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

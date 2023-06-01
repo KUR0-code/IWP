@@ -25,7 +25,8 @@ public class InputManager : MonoBehaviour
     bool CursorToggle = false;
     bool toggle = false;
 
-
+    public GameObject player;
+    displayInventory DisplayInventory;
     // Start is called before the first frame update
     void Awake()
     {
@@ -33,10 +34,16 @@ public class InputManager : MonoBehaviour
         walking = playerInput.Walking;
         movement = GetComponent<PlayerMovement>();
         look = GetComponent<PlayerLook>();
+
         SettingUI = GameObject.FindGameObjectWithTag("Settings");
         SettingUI.gameObject.SetActive(false);
+
         inventoryUI = GameObject.FindGameObjectWithTag("Inventory");
         inventoryUI.gameObject.SetActive(false);
+
+        player = GameObject.FindGameObjectWithTag("Player");
+        DisplayInventory = inventoryUI.GetComponent<displayInventory>();
+
 
         // ctx is call back context works like a pointer.
         walking.Jump.performed += ctx => movement.Jump();
@@ -45,7 +52,8 @@ public class InputManager : MonoBehaviour
         walking.Shoot.started += _ => startFiring();
         walking.Shoot.canceled += _ => stopFiring();
         walking.Settings.performed += _ => UnlockCursor();
-        walking.Inventory.performed += _ => InventoryUI();
+        walking.Inventory.performed += _ => InventoryUI();                                 // DisplayInventory.GetComponent<displayInventory>().FindItem().GetComponent<HealingPotion>().restoreHealthValue
+        walking.EatFood.performed += _ => player.GetComponent<PlayerHealth>().RestoreHealth(20);
     }
 
     // Update is called once per frame
