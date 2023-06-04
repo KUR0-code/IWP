@@ -42,8 +42,6 @@ public class InputManager : MonoBehaviour
         inventoryUI = GameObject.FindGameObjectWithTag("Inventory");
         inventoryUI.gameObject.SetActive(false);
 
-  
-
         // ctx is call back context works like a pointer.
         walking.Jump.performed += ctx => movement.Jump();
         walking.Crouch.performed += ctx => movement.Crouch();
@@ -53,8 +51,6 @@ public class InputManager : MonoBehaviour
         walking.Settings.performed += _ => UnlockCursor();
         walking.Inventory.performed += _ => InventoryUI();
         walking.EatFood.performed += _ => HealPlayer();
-
-
     }
     
     // Update is called once per frame

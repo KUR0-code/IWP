@@ -66,6 +66,7 @@ public class Gun : MonoBehaviour
                     {
                         hit.collider.GetComponent<Damageable>().takeDamage(damage, hit.point, hit.normal);
                     }
+                  
                 }
 
             }

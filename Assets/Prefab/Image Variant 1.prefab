@@ -9,7 +9,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 522281802002953630, guid: 43d39f20bf0f3e146b9780b85daf89f5, type: 3}
       propertyPath: m_Name
-      value: Image
+      value: Image Variant 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2115881202424815500, guid: 43d39f20bf0f3e146b9780b85daf89f5, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 11b0a800cd02b3442b01269a96fe7730, type: 3}
+    - target: {fileID: 2115881202424815500, guid: 43d39f20bf0f3e146b9780b85daf89f5, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2115881202424815500, guid: 43d39f20bf0f3e146b9780b85daf89f5, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2115881202424815500, guid: 43d39f20bf0f3e146b9780b85daf89f5, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6942959175469913978, guid: 43d39f20bf0f3e146b9780b85daf89f5, type: 3}
       propertyPath: m_Pivot.x
