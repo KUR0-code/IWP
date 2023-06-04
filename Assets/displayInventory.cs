@@ -15,7 +15,7 @@ public class displayInventory : MonoBehaviour
 
     Dictionary<InventorySlot, GameObject> itemsDisplayed = new Dictionary<InventorySlot, GameObject>();
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         CreateDisplay();
     }

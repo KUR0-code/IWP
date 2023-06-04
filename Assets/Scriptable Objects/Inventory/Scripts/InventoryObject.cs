@@ -12,7 +12,6 @@ public class InventoryObject : ScriptableObject
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-
     }
     public void AddItem(ItemObject _item, int _amount)
     {
@@ -33,7 +32,7 @@ public class InventoryObject : ScriptableObject
     }
     public void RemoveHeal()
     {
-        for(int i =0; i <Container.Count; i++)
+        for (int i = 0; i < Container.Count; i++)
         {
             if (Container[i].item.type == ItemType.Food && Container[i].amount >= 1)
             {
@@ -46,9 +45,9 @@ public class InventoryObject : ScriptableObject
             }
             else
             {
-                
+
             }
-           
+
         }
        
     }

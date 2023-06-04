@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Player Inventory
   m_EditorClassIdentifier: 
   Container: []
+  player: {fileID: 4746983560859563993, guid: 2bf73fbaf558a2a47a117b8b11ddfe2a, type: 3}
   healingPotion: {fileID: 11400000, guid: 19ca531d4a686f642b0d08970fb5b9ef, type: 2}
