@@ -28,6 +28,9 @@ public class InputManager : MonoBehaviour
     public GameObject player;
 
     public InventoryObject inventoryObject;
+
+    public HealingPotion healingPotion;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -72,7 +75,11 @@ public class InputManager : MonoBehaviour
 
     private void HealPlayer()
     {
-        inventoryObject.RemoveHeal();
+        if(inventoryObject.RemoveHeal())
+        {
+            Debug.Log("enter");
+            player.GetComponent<PlayerHealth>().RestoreHealth(healingPotion.restoreHealthValue);
+        }
     }  
 
     private void InventoryUI()
