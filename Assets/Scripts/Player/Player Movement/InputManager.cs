@@ -26,7 +26,8 @@ public class InputManager : MonoBehaviour
     bool toggle = false;
 
     public GameObject player;
-    displayInventory DisplayInventory;
+
+    public InventoryObject inventoryObject;
     // Start is called before the first frame update
     void Awake()
     {
@@ -41,9 +42,7 @@ public class InputManager : MonoBehaviour
         inventoryUI = GameObject.FindGameObjectWithTag("Inventory");
         inventoryUI.gameObject.SetActive(false);
 
-        player = GameObject.FindGameObjectWithTag("Player");
-        DisplayInventory = inventoryUI.GetComponent<displayInventory>();
-
+  
 
         // ctx is call back context works like a pointer.
         walking.Jump.performed += ctx => movement.Jump();
@@ -52,10 +51,12 @@ public class InputManager : MonoBehaviour
         walking.Shoot.started += _ => startFiring();
         walking.Shoot.canceled += _ => stopFiring();
         walking.Settings.performed += _ => UnlockCursor();
-        walking.Inventory.performed += _ => InventoryUI();                                 // DisplayInventory.GetComponent<displayInventory>().FindItem().GetComponent<HealingPotion>().restoreHealthValue
-        walking.EatFood.performed += _ => player.GetComponent<PlayerHealth>().RestoreHealth(20);
-    }
+        walking.Inventory.performed += _ => InventoryUI();
+        walking.EatFood.performed += _ => HealPlayer();
 
+
+    }
+    
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -69,10 +70,14 @@ public class InputManager : MonoBehaviour
         look.ProcessLook(walking.Look.ReadValue<Vector2>()); 
     }
 
+    private void HealPlayer()
+    {
+        inventoryObject.RemoveHeal();
+    }  
+
     private void InventoryUI()
     {
         toggle = !toggle;
-        Debug.Log(toggle);
         if(toggle)
             inventoryUI.gameObject.SetActive(true);
         else

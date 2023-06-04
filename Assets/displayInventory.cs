@@ -15,7 +15,7 @@ public class displayInventory : MonoBehaviour
 
     Dictionary<InventorySlot, GameObject> itemsDisplayed = new Dictionary<InventorySlot, GameObject>();
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         CreateDisplay();
     }
@@ -27,12 +27,13 @@ public class displayInventory : MonoBehaviour
     }
     private void UpdateDisplay()
     {
-        for(int i =0; i< inventory.Container.Count; i++)
+        for(int i = 0; i< inventory.Container.Count; i++)
         {
-            if(itemsDisplayed.ContainsKey(inventory.Container[i]))
+            if (itemsDisplayed.ContainsKey(inventory.Container[i]))
             {
                 itemsDisplayed[inventory.Container[i]].GetComponentInChildren<TextMeshProUGUI>().text = inventory.Container[i].amount.ToString("n0");
             }
+
             else
             {
                 var obj = Instantiate(inventory.Container[i].item.prefab, Vector3.zero, Quaternion.identity, transform);
@@ -55,20 +56,5 @@ public class displayInventory : MonoBehaviour
     public Vector3 GetPosition(int i)
     {
         return new Vector3(xStart + (X_SpaceBetweenitems * (i % Column)), yStart + (-Y_SpaceBetweenitems * (i / Column)), 0f);
-    }
-
-    public GameObject FindItem()
-    {
-        for (int i = 0; i < inventory.Container.Count; i++)
-        {
-            if (itemsDisplayed.ContainsKey(inventory.Container[i]))
-            {
-                if (itemsDisplayed[inventory.Container[i]].GetComponent<HealingPotion>() != null)
-                {
-                    return itemsDisplayed[inventory.Container[i]];
-                }
-            }
-        }
-        return null;
     }
 }
