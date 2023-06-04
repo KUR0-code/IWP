@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62b0102440ca4eb459768c51b41799b1, type: 3}
   m_Name: Chestplate
   m_EditorClassIdentifier: 
-  prefab: {fileID: 8223207655442445220, guid: c12b096d078621848a0aba276ac46db4, type: 3}
+  prefab: {fileID: 4526037272948298205, guid: 43d39f20bf0f3e146b9780b85daf89f5, type: 3}
   type: 1
   description: 
-  atkBonus: 0
+  atkBonus: 1
   defenceBonus: 15

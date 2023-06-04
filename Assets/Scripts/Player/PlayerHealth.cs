@@ -40,7 +40,7 @@ public class PlayerHealth : MonoBehaviour
             {
                 return;
             }
-
+           
 
             durationTimer += Time.deltaTime;
             if (durationTimer > duration)
@@ -51,6 +51,8 @@ public class PlayerHealth : MonoBehaviour
                 overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, tempAlpha);
             }
         }
+
+        
     }
 
     public void updateHealthUI()

@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponSwitching : MonoBehaviour {
+public class WeaponSwitching : MonoBehaviour
+{
 
     [Header("References")]
     [SerializeField] private Transform[] weapons;
@@ -17,14 +18,16 @@ public class WeaponSwitching : MonoBehaviour {
     private int selectedWeapon = 0;
     private float timeSinceLastSwitch;
 
-    private void Awake() {
+    private void Awake()
+    {
         SetWeapons();
         Select(selectedWeapon);
 
         timeSinceLastSwitch = 0f;
     }
 
-    private void SetWeapons() {
+    private void SetWeapons()
+    {
         for (int i = 0; i < keys.Length; i++)
         {
             if (Input.GetKeyDown(keys[i]) && selectedWeapon != i && timeSinceLastSwitch >= switchTime)
@@ -38,13 +41,15 @@ public class WeaponSwitching : MonoBehaviour {
     {
         return transform.GetChild(selectedWeapon);
     }
-    private void Update() {
-        
+    private void Update()
+    {
+
         timeSinceLastSwitch += Time.deltaTime;
         SetWeapons();
     }
 
-    private void Select(int weaponIndex) {
+    private void Select(int weaponIndex)
+    {
         for (int i = 0; i < weapons.Length; i++)
         {
             if (i == weaponIndex)
@@ -58,5 +63,5 @@ public class WeaponSwitching : MonoBehaviour {
         OnWeaponSelected();
     }
 
-    private void OnWeaponSelected() {  }
+    private void OnWeaponSelected() { }
 }

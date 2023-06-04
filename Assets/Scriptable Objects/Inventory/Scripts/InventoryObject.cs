@@ -33,7 +33,7 @@ public class InventoryObject : ScriptableObject
     }
     public void RemoveHeal()
     {
-        for (int i = 0; i < Container.Count; i++)
+        for(int i =0; i <Container.Count; i++)
         {
             if (Container[i].item.type == ItemType.Food && Container[i].amount >= 1)
             {
@@ -46,31 +46,13 @@ public class InventoryObject : ScriptableObject
             }
             else
             {
-
+                
             }
+           
         }
+       
     }
-    
-    public void EquipChestplate()
-    {
-        for (int i = 0; i < Container.Count; i++)
-        {
-            if (Container[i].item.type == ItemType.Equipment && Container[i].amount >= 1)
-            {
-
-                Container[i].amount -= 1;
-                player.GetComponent<PlayerHealth>().RestoreHealth(healingPotion.restoreHealthValue);
-                if (Container[i].amount <= 0)
-                {
-                    Container[i].amount = 0;
-                }
-            }
-            else
-            {
-
-            }
-        }
-    }
+      
 }
 
 [System.Serializable]

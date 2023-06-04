@@ -10,7 +10,6 @@ TagManager:
   - Door
   - Settings
   - Inventory
-  - Map
   layers:
   - Default
   - TransparentFX

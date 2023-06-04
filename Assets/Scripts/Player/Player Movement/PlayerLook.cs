@@ -14,6 +14,7 @@ public class PlayerLook : MonoBehaviour
     {
         float mouseX = Input.x;
         float mouseY = Input.y;
+
         // calculate the camera rotation
         xRotation -= (mouseY * Time.deltaTime) * ySensitivity;
         xRotation = Mathf.Clamp(xRotation, -50, 50);
