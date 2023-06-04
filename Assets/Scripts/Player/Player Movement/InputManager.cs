@@ -77,7 +77,6 @@ public class InputManager : MonoBehaviour
     {
         if(inventoryObject.RemoveHeal())
         {
-            Debug.Log("enter");
             player.GetComponent<PlayerHealth>().RestoreHealth(healingPotion.restoreHealthValue);
         }
     }  

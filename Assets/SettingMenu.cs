@@ -16,7 +16,7 @@ public class SettingMenu : MonoBehaviour
 
     public void QuitToMainMenu()
     {
-        DontDestroyOnLoad(Player);
+        // DontDestroyOnLoad(Player);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
 }
