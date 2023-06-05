@@ -159,7 +159,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 242.6, y: 63.199997}
+  m_AnchoredPosition: {x: 242.6001, y: 63.19995}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &23037195 stripped
@@ -7220,8 +7220,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 669.6863, y: 31.026}
-  m_SizeDelta: {x: -1343.367, y: -164.35}
+  m_AnchoredPosition: {x: 779.59, y: 22}
+  m_SizeDelta: {x: -1559.1765, y: -528.8041}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1936453602
 MonoBehaviour:
@@ -7274,11 +7274,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory: {fileID: 11400000, guid: 28224279d6aaf8d4f99d590017bbdf13, type: 2}
-  xStart: -36
-  yStart: 124
-  X_SpaceBetweenitems: 45
+  xStart: -119
+  yStart: 226
+  X_SpaceBetweenitems: 120
   Column: 3
-  Y_SpaceBetweenitems: 45
+  Y_SpaceBetweenitems: 120
 --- !u!1 &1952408842
 GameObject:
   m_ObjectHideFlags: 0

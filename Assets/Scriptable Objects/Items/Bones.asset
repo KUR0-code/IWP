@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e1294abb20fbe14a9e37d163724c908, type: 3}
   m_Name: Bones
   m_EditorClassIdentifier: 
-  prefab: {fileID: 522281802002953630, guid: 43d39f20bf0f3e146b9780b85daf89f5, type: 3}
+  prefab: {fileID: 2617633588752033760, guid: 25b57d4323521894fb14be4fea72ea48, type: 3}
   type: 2
   description: 'left over bones
 
