@@ -19,7 +19,7 @@ public class InputManager : MonoBehaviour
     [SerializeField]
     private ParticleSystem ShootingSystem;
 
-    public GameObject SettingUI;
+    GameObject SettingUI;
 
     public GameObject inventoryUI;
     bool CursorToggle = false;
@@ -27,7 +27,7 @@ public class InputManager : MonoBehaviour
 
     public GameObject player;
 
-    public InventoryObject inventoryObject;
+    InventoryObject inventoryObject;
 
     public HealingPotion healingPotion;
 
@@ -56,8 +56,6 @@ public class InputManager : MonoBehaviour
         walking.Settings.performed += _ => UnlockCursor();
         walking.Inventory.performed += _ => InventoryUI();
         walking.EatFood.performed += _ => HealPlayer();
-
-
     }
     
     // Update is called once per frame
@@ -97,9 +95,8 @@ public class InputManager : MonoBehaviour
         if (CursorToggle)
         {
             SettingUI.gameObject.SetActive(true);
-            Cursor.lockState = CursorLockMode.None;
+            Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = true;
-
         }
         else
         {
