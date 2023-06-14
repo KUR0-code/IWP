@@ -34,13 +34,17 @@ public class PlayerInteract : MonoBehaviour
         RaycastHit Hit;
         if (Physics.Raycast(ray, out Hit, distance, mask))
         {
-            if(Hit.collider.GetComponent<Interactable>() != null)
+            if (Hit.collider.GetComponent<Interactable>() != null)
             {
                 Interactable interactable = Hit.collider.GetComponent<Interactable>();
                 playerUI.UpdateText(interactable.PromptMessage);
                 if (inputManager.walking.Interact.triggered)
-                { 
-                    interactable.BaseInteract();
+                {
+                    interactable.BaseInteract(); 
+                    if (Hit.collider.CompareTag("Boxes"))
+                    {
+                        Hit.collider.GetComponent<Medkit>().BoxInteracted = true;
+                    }
                     var item = Hit.collider.GetComponent<Item>();
                     if (item)
                     {

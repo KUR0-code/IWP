@@ -10,6 +10,7 @@ TagManager:
   - Door
   - Settings
   - Inventory
+  - Boxes
   layers:
   - Default
   - TransparentFX
