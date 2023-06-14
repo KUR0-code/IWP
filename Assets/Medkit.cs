@@ -18,7 +18,7 @@ public class Medkit : MonoBehaviour
         if(BoxInteracted)
         {
             Debug.Log("open");
-            animator.SetTrigger("Open");
+            // animator.SetTrigger("Open");
             animator.speed = 0.5f;
         }
     }
