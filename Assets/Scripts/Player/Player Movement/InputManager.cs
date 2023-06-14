@@ -56,6 +56,7 @@ public class InputManager : MonoBehaviour
         walking.Settings.performed += _ => UnlockCursor();
         walking.Inventory.performed += _ => InventoryUI();
         walking.EatFood.performed += _ => HealPlayer();
+
     }
     
     // Update is called once per frame
@@ -126,9 +127,6 @@ public class InputManager : MonoBehaviour
         if(fireCoroutine != null)
         {
             StopCoroutine(fireCoroutine);
-            //ShootingSystem.Stop();
         }
     }
-
-
 }

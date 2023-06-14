@@ -27,7 +27,6 @@ public class patrol : StateMachineBehaviour
         agent.SetDestination(wayPoints[Random.Range(0, wayPoints.Count)].position);
 
         player = GameObject.FindGameObjectWithTag("Player").transform;
-
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
