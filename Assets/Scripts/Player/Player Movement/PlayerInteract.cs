@@ -40,17 +40,20 @@ public class PlayerInteract : MonoBehaviour
                 playerUI.UpdateText(interactable.PromptMessage);
                 if (inputManager.walking.Interact.triggered)
                 {
-                    interactable.BaseInteract(); 
+                    interactable.BaseInteract();
+                    var item = Hit.collider.GetComponent<Item>();
+
                     if (Hit.collider.CompareTag("Boxes"))
                     {
                         Hit.collider.GetComponent<Medkit>().BoxInteracted = true;
-                    }
-                    var item = Hit.collider.GetComponent<Item>();
-                    if (item)
-                    {
                         inventory.AddItem(item.item, 1);
-                        Destroy(Hit.collider.GetComponent<Item>().gameObject);
                     }
+                   
+                    //if (item)
+                    //{
+                    //    inventory.AddItem(item.item, 1);
+                    //    Destroy(Hit.collider.GetComponent<Item>().gameObject);
+                    //}
                 }
             }
         }
