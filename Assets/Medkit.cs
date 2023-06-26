@@ -6,10 +6,14 @@ public class Medkit : MonoBehaviour
 {
     public bool BoxInteracted = false;
     public Animator animator;
+    public int count;
+    public bool HasOpened;
     // Start is called before the first frame update
     void Awake()
     {
-        animator.speed = 0;    
+        animator.speed = 0;
+        HasOpened = false;
+        count += Random.Range(1, 5);
     }
 
     // Update is called once per frame
@@ -20,6 +24,7 @@ public class Medkit : MonoBehaviour
             Debug.Log("open");
             // animator.SetTrigger("Open");
             animator.speed = 0.5f;
+            HasOpened = true;
         }
     }
 }

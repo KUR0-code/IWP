@@ -46,7 +46,8 @@ public class PlayerInteract : MonoBehaviour
                     if (Hit.collider.CompareTag("Boxes"))
                     {
                         Hit.collider.GetComponent<Medkit>().BoxInteracted = true;
-                        inventory.AddItem(item.item, 1);
+                        if(!Hit.collider.GetComponent<Medkit>().HasOpened)
+                            inventory.AddItem(item.item, Hit.collider.GetComponent<Medkit>().count);
                     }
                    
                     //if (item)
