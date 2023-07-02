@@ -6,11 +6,13 @@ public class Attack : StateMachineBehaviour
 {
     Transform player;
     float attackTimer;
+    int RandomAttack;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         attackTimer = 0;
+        RandomAttack = 0;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -19,11 +21,23 @@ public class Attack : StateMachineBehaviour
         animator.transform.LookAt(player);
         float distance = Vector3.Distance(player.position, animator.transform.position);
         attackTimer += Time.deltaTime;
-        if (attackTimer >= 2)
+        RandomAttack = Random.Range(1, 2);
+        switch(RandomAttack)
         {
-            player.gameObject.GetComponent<PlayerHealth>().TakeDamage(20);
-            attackTimer = 0;
+            case 1:
+                if (attackTimer >= 2)
+                {
+                    player.gameObject.GetComponent<PlayerHealth>().TakeDamage(30);
+                    attackTimer = 0;
+                }
+                break;
+
+            case 2:
+                animator.SetBool("AttackPattern2", true);
+                break;
+
         }
+       
        
         if (distance > 4.8f)
         {
