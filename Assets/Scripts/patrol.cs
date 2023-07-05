@@ -7,10 +7,13 @@ public class patrol : StateMachineBehaviour
 {
     float time;
     List<Transform> wayPoints = new List<Transform>();
+
+    List<Transform> Boss_wayPoints = new List<Transform>();
     NavMeshAgent agent;
 
     Transform player;
     float chaseRange = 8;
+    public bool isBoss;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -18,13 +21,29 @@ public class patrol : StateMachineBehaviour
         agent = animator.GetComponent<NavMeshAgent>();
         agent.speed = 1.5f;
         time = 0;
-        GameObject go = GameObject.FindGameObjectWithTag("Waypoints");
-        foreach(Transform t in go.transform)
+        if(!isBoss)
         {
-            wayPoints.Add(t);
-        }
+            GameObject go = GameObject.FindGameObjectWithTag("Waypoints");
 
-        agent.SetDestination(wayPoints[Random.Range(0, wayPoints.Count)].position);
+            foreach (Transform t in go.transform)
+            {
+                wayPoints.Add(t);
+            }
+
+            agent.SetDestination(wayPoints[Random.Range(0, wayPoints.Count)].position);
+        }
+        else
+        {
+            GameObject go = GameObject.FindGameObjectWithTag("Boss_Waypoints");
+
+            foreach (Transform t in go.transform)
+            {
+                Boss_wayPoints.Add(t);
+            }
+
+            agent.SetDestination(Boss_wayPoints[Random.Range(0, Boss_wayPoints.Count)].position);
+        }
+       
 
         player = GameObject.FindGameObjectWithTag("Player").transform;
     }
@@ -32,9 +51,19 @@ public class patrol : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if(agent.remainingDistance <= agent.stoppingDistance)
+        if (!isBoss)
         {
-            agent.SetDestination(wayPoints[Random.Range(0, wayPoints.Count)].position);
+            if (agent.remainingDistance <= agent.stoppingDistance)
+            {
+                agent.SetDestination(wayPoints[Random.Range(0, wayPoints.Count)].position);
+            }
+        }
+        else
+        {
+            if (agent.remainingDistance <= agent.stoppingDistance)
+            {
+                agent.SetDestination(Boss_wayPoints[Random.Range(0, Boss_wayPoints.Count)].position);
+            }
         }
 
         time += Time.deltaTime;

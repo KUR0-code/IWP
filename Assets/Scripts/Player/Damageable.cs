@@ -50,8 +50,16 @@ public class Damageable : MonoBehaviour
         Animator.SetTrigger("Die");
         GetComponent<Collider>().enabled = false;
         died = true;
+        //if (gameObject.GetComponent<Collider>().CompareTag("Dragon"))
+        //{
+        //    // Dragon EXP
+        //    player.GetComponent<LevelSystem>().GainExpRate(10);
+        //}
+        //else if (gameObject.GetComponent<Collider>().CompareTag("Boss"))
+        //{
+        //    player.GetComponent<LevelSystem>().GainExpRate(50);
 
-        // Dragon EXP
-        player.GetComponent<LevelSystem>().GainExpRate(10);
+        //}
+
     }
 }

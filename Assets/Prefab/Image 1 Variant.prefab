@@ -91,6 +91,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2293895311696396661, guid: df76ee1ef78dfe54088e3d200a907eae, type: 3}
+      propertyPath: m_text
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2293895311696396661, guid: df76ee1ef78dfe54088e3d200a907eae, type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 2293895311696396661, guid: df76ee1ef78dfe54088e3d200a907eae, type: 3}
+      propertyPath: m_enableWordWrapping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2293895311696396661, guid: df76ee1ef78dfe54088e3d200a907eae, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7202116933435595931, guid: df76ee1ef78dfe54088e3d200a907eae, type: 3}
       propertyPath: m_Name
       value: Image 1 Variant

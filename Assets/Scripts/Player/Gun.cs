@@ -19,10 +19,6 @@ public class Gun : MonoBehaviour
     bool rapidFire = false;
 
     [SerializeField]
-    bool isMelee = true;
-    public bool hasMelee = false;
-
-    [SerializeField]
     int maxAmmo;
     [SerializeField]
     int currentAmmo;
@@ -51,30 +47,27 @@ public class Gun : MonoBehaviour
     public void shoot()
     {
         // the weapon the player is holding is a gun
-        if(!isMelee)
-        {
-            currentAmmo--;
-            ShootingSystem.Play();
+        currentAmmo--;
+        ShootingSystem.Play();
 
-            if (Physics.Raycast(BulletSpawnPoint.position, cam.transform.forward, out RaycastHit hit))
+        if (Physics.Raycast(BulletSpawnPoint.position, cam.transform.forward, out RaycastHit hit))
+        {
+            TrailRenderer trail = Instantiate(trailRenderer, BulletSpawnPoint.position, Quaternion.identity);
+            StartCoroutine(SpawnTrail(trail, hit));
+            if (hit.collider.GetComponent<Damageable>() != null)
             {
-                TrailRenderer trail = Instantiate(trailRenderer, BulletSpawnPoint.position, Quaternion.identity);
-                StartCoroutine(SpawnTrail(trail, hit));
-                if (hit.collider.GetComponent<Damageable>() != null)
+                if(hit.collider.GetComponent<Damageable>().tag == "Dragon")
                 {
-                    if (hit.collider.tag == "Dragon")
-                    {
-                        hit.collider.GetComponent<Damageable>().takeDamage(damage, hit.point, hit.normal);
-                    }
+                    hit.collider.GetComponent<Damageable>().takeDamage(damage, hit.point, hit.normal);
+                } 
+                if(hit.collider.GetComponent<Damageable>().tag == "Boss")
+                {
+                    hit.collider.GetComponent<Damageable>().takeDamage(damage, hit.point, hit.normal);
                 }
-
             }
-            StartCoroutine(StopShooting(0.1f));
+
         }
-        else // weapon is a melee
-        {
-            hasMelee = true;
-        }
+        StartCoroutine(StopShooting(0.1f));
     }
    
     private IEnumerator SpawnTrail(TrailRenderer trail, RaycastHit hit)

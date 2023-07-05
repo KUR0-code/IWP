@@ -11,6 +11,8 @@ TagManager:
   - Settings
   - Inventory
   - Boxes
+  - Boss_Waypoints
+  - Boss
   layers:
   - Default
   - TransparentFX

@@ -37,6 +37,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03b62d7466ec3d34e87379f110813188, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBoss: 0
 --- !u!1101 &-5317363347979228248
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -178,6 +179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7246e47a8e081eb4fa63b34b056128bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBoss: 0
 --- !u!114 &-1922209154806081837
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -381,6 +383,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06dde46362c4f2e4fa2ac62f96a579fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsBoss: 0
 --- !u!1102 &6905477612462458993
 AnimatorState:
   serializedVersion: 6
@@ -500,10 +503,10 @@ AnimatorStateMachine:
     m_Position: {x: 370, y: 110, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 9024440094285192806}
-    m_Position: {x: 370, y: 0, z: 0}
+    m_Position: {x: 370, y: 20, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3674505428110982051}
-    m_Position: {x: 610, y: 30, z: 0}
+    m_Position: {x: 620, y: 30, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7125737578205131307}
     m_Position: {x: 740, y: -40, z: 0}

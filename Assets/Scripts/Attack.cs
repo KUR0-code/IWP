@@ -7,6 +7,7 @@ public class Attack : StateMachineBehaviour
     Transform player;
     float attackTimer;
     int RandomAttack;
+    public bool IsBoss;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -22,28 +23,41 @@ public class Attack : StateMachineBehaviour
         float distance = Vector3.Distance(player.position, animator.transform.position);
         attackTimer += Time.deltaTime;
         RandomAttack = Random.Range(1, 2);
-        switch(RandomAttack)
+        if (!IsBoss)
         {
-            case 1:
-                if (attackTimer >= 2)
-                {
-                    player.gameObject.GetComponent<PlayerHealth>().TakeDamage(30);
-                    attackTimer = 0;
-                }
-                break;
+            if (attackTimer >= 2)
+            {
+                player.gameObject.GetComponent<PlayerHealth>().TakeDamage(20);
+                attackTimer = 0;
+            }
+            if (distance > 4.8f)
+            {
+                animator.SetBool("isAttacking", false);
+            }
+        }
+        else
+        {
+            switch (RandomAttack)
+            {
+                case 1:
+                    if (attackTimer >= 2)
+                    {
+                        player.gameObject.GetComponent<PlayerHealth>().TakeDamage(30);
+                        attackTimer = 0;
+                        if (distance > 4.8f)
+                        {
+                            animator.SetBool("isAttacking", false);
+                        }
+                    }
+                    break;
 
-            case 2:
-                animator.SetBool("AttackPattern2", true);
-                break;
-
+                case 2:
+                    animator.SetBool("AttackPattern2", true);
+                    break;
+            }
         }
        
-       
-        if (distance > 4.8f)
-        {
-            animator.SetBool("isAttacking", false);
-            Debug.Log("patrol");
-        }
+        
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
@@ -51,5 +65,27 @@ public class Attack : StateMachineBehaviour
     {
       
       
+    }
+
+    void BossAttack(Animator animator,float distance)
+    {
+        switch (RandomAttack)
+        {
+            case 1:
+                if (attackTimer >= 2)
+                {
+                    player.gameObject.GetComponent<PlayerHealth>().TakeDamage(30);
+                    attackTimer = 0;
+                    if (distance > 4.8f)
+                    {
+                        animator.SetBool("isAttacking", false);
+                    }
+                } 
+                break;
+
+            case 2:
+                animator.SetBool("AttackPattern2", true);
+                break;
+        }
     }
 }
