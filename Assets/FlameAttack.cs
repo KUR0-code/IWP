@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Attack : StateMachineBehaviour
+public class FlameAttack : StateMachineBehaviour
 {
     Transform player;
     float attackTimer;
-    public bool IsBoss;
+    int DodgeChance;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -20,36 +20,33 @@ public class Attack : StateMachineBehaviour
         animator.transform.LookAt(player);
         float distance = Vector3.Distance(player.position, animator.transform.position);
         attackTimer += Time.deltaTime;
-        if (!IsBoss)
+        DodgeChance = Random.Range(1, 10);
+        if (attackTimer >= 2)
         {
-            if (attackTimer >= 2)
+            if (DodgeChance == 1)
             {
-                player.gameObject.GetComponent<PlayerHealth>().TakeDamage(20);
-                attackTimer = 0;
+                player.gameObject.GetComponent<PlayerHealth>().TakeDamage(0);
             }
-            if (distance > 4.8f)
+            else
             {
-                animator.SetBool("isAttacking", false);
+                 player.gameObject.GetComponent<PlayerHealth>().TakeDamage(10);
             }
+           
+            attackTimer = 0;
         }
-        else
+        if (distance > 10f)
         {
-            if (attackTimer >= 2)
-            {
-                attackTimer = 0;
-                player.gameObject.GetComponent<PlayerHealth>().TakeDamage(30);
-            }
-            if (distance > 6.5f)
-            {
-                animator.SetBool("isAttacking", false);
-            }
+            animator.SetBool("AttackPattern2", false);
+        }
+        if(distance < 6f)
+        {
+            animator.SetBool("isAttacking", true);
         }
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-      
-      
+
     }
 }

@@ -13,23 +13,23 @@ public class Damageable : MonoBehaviour
     [SerializeField]
     public bool died = false;
     public Animator Animator;
+    float StunTimer;
 
-    GameObject player;
-
-    private void Start()
-    {
-        player = GameObject.FindGameObjectWithTag("Player");
-    }
     // Start is called before the first frame update
     void Awake()
     {
         CurrentHp = maxHp;
         died = false;
+        StunTimer = 0;
+    }
+
+    private void Update()
+    {
+        StunTimer += Time.deltaTime;
     }
 
     public void takeDamage(float damage, Vector3 HitPos, Vector3 HitNormal)
     {
-        // Debug.Log(died);
         Instantiate(hitEffect, HitPos, Quaternion.LookRotation(HitNormal));
         CurrentHp -= damage;
         if(CurrentHp <= 0 )
@@ -39,8 +39,11 @@ public class Damageable : MonoBehaviour
         }
         else
         {
-            Animator.SetTrigger("Damage");
-            // stun lock 
+            if (StunTimer >= 5)
+            {
+                Animator.SetTrigger("Damage");
+                StunTimer = 0;
+            }
         }
     }
 
@@ -50,16 +53,5 @@ public class Damageable : MonoBehaviour
         Animator.SetTrigger("Die");
         GetComponent<Collider>().enabled = false;
         died = true;
-        //if (gameObject.GetComponent<Collider>().CompareTag("Dragon"))
-        //{
-        //    // Dragon EXP
-        //    player.GetComponent<LevelSystem>().GainExpRate(10);
-        //}
-        //else if (gameObject.GetComponent<Collider>().CompareTag("Boss"))
-        //{
-        //    player.GetComponent<LevelSystem>().GainExpRate(50);
-
-        //}
-
     }
 }
