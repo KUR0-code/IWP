@@ -2,27 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Hit : StateMachineBehaviour
+public class RegendHealth : StateMachineBehaviour
 {
-    int RandomDefendChance;
+    GameObject Boss;
+    float BossHealth;
+    float RegendHp;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-            
+        Boss = GameObject.FindGameObjectWithTag("Boss");
+        BossHealth = Boss.GetComponent<Damageable>().CurrentHp;
+        RegendHp = Boss.GetComponent<Damageable>().maxHp / 3;
+        BossHealth += Boss.GetComponent<Damageable>().RegendHealth(RegendHp);
+        if (BossHealth >= Boss.GetComponent<Damageable>().maxHp)
+        {
+            BossHealth = Boss.GetComponent<Damageable>().maxHp;
+        }
+        
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        RandomDefendChance = Random.Range(1, 3);
-        if(RandomDefendChance == 1)
-        {
-            animator.SetBool("isDefending", true);
-        }
-        else
-        {
-            animator.SetBool("isDefending", false);
-        }
+        
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

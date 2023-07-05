@@ -29,7 +29,7 @@ public class FlameAttack : StateMachineBehaviour
             }
             else
             {
-                 player.gameObject.GetComponent<PlayerHealth>().TakeDamage(10);
+                 player.gameObject.GetComponent<PlayerHealth>().TakeDamage(40);
             }
            
             attackTimer = 0;

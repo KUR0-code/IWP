@@ -47,6 +47,11 @@ public class Damageable : MonoBehaviour
         }
     }
 
+    public float RegendHealth(float damage)
+    {
+        CurrentHp += damage;
+        return CurrentHp;
+    }
     public void Die()
     {
         print(name + " was destroyed");

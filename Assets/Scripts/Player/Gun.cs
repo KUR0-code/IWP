@@ -59,22 +59,13 @@ public class Gun : MonoBehaviour
             {
                 if(hit.collider.GetComponent<Damageable>().CompareTag("Dragon"))
                 {
-                    if (!hit.collider.GetComponent<Hit>().Defended)
-                    {
-                        hit.collider.GetComponent<Damageable>().takeDamage(damage, hit.point, hit.normal);
-                    }
-
-                    if (hit.collider.GetComponent<Hit>().Defended)
-                    {
-                        Debug.Log("HERE");
-                        hit.collider.GetComponent<Damageable>().takeDamage(damage - 10, hit.point, hit.normal);
-                    }
-
+                    hit.collider.GetComponent<Damageable>().takeDamage(damage, hit.point, hit.normal);
                     if (hit.collider.GetComponent<Damageable>().CurrentHp <= 0)
                     {
                         player.GetComponent<LevelSystem>().GainExpRate(10);
                     }
                 } 
+
                 if(hit.collider.GetComponent<Damageable>().CompareTag("Boss"))
                 {
                     hit.collider.GetComponent<Damageable>().takeDamage(damage, hit.point, hit.normal);
