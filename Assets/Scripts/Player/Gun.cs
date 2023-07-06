@@ -20,8 +20,9 @@ public class Gun : MonoBehaviour
 
     [SerializeField]
     int maxAmmo;
-    [SerializeField]
-    int currentAmmo;
+    public int currentAmmo;
+  
+    public int totalAmmo;
 
     [SerializeField]
     float reloadTime;
@@ -75,7 +76,6 @@ public class Gun : MonoBehaviour
                     }
                 }
             }
-
         }
         StartCoroutine(StopShooting(0.1f));
     }
@@ -114,16 +114,23 @@ public class Gun : MonoBehaviour
         }
 
     }
-    IEnumerator Reload()
+    public IEnumerator Reload()
     {
-        if(currentAmmo == maxAmmo)
+        if (currentAmmo != maxAmmo && totalAmmo >= 0)
         {
-            yield return null;
+            int AmmoBuffer;
+           
+            print("reloading");
+            yield return reloadWait;
+            AmmoBuffer = maxAmmo - currentAmmo;
+            if (AmmoBuffer > 0 && AmmoBuffer <= totalAmmo)
+            {
+                currentAmmo += AmmoBuffer;
+                totalAmmo -= AmmoBuffer;
+            }
+           
+            print("Finish reloading");
         }
-        print("reloading");
-        yield return reloadWait;
-        currentAmmo = maxAmmo;
-        print("Finish reloading");
     }
 
     bool CanShoot()

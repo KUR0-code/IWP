@@ -22,6 +22,7 @@ public class InputManager : MonoBehaviour
     GameObject SettingUI;
 
     public GameObject inventoryUI;
+    
     bool CursorToggle = false;
     bool toggle = false;
 
@@ -56,11 +57,12 @@ public class InputManager : MonoBehaviour
         walking.Settings.performed += _ => UnlockCursor();
         walking.Inventory.performed += _ => InventoryUI();
         walking.EatFood.performed += _ => HealPlayer();
+        walking.Reload.performed += _ => StartCoroutine(weaponholder.GetComponent<WeaponSwitching>().GetWeapon().GetComponent<Gun>().Reload());
 
     }
     
     // Update is called once per frame
-    void FixedUpdate()
+    void FixedUpdate()  
     {
         // move using the value of movement actions
         movement.ProcessMoving(walking.Movement.ReadValue<Vector2>());

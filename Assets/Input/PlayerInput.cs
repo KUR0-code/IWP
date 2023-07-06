@@ -125,6 +125,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Reload"",
+                    ""type"": ""Button"",
+                    ""id"": ""041c22f0-32d0-4159-88c7-4b0ab55737a2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -314,6 +323,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""EatFood"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f9f24d94-4064-4a9f-92b7-2c2ff2562005"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -333,6 +353,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Walking_Settings = m_Walking.FindAction("Settings", throwIfNotFound: true);
         m_Walking_Inventory = m_Walking.FindAction("Inventory", throwIfNotFound: true);
         m_Walking_EatFood = m_Walking.FindAction("EatFood", throwIfNotFound: true);
+        m_Walking_Reload = m_Walking.FindAction("Reload", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -405,6 +426,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Walking_Settings;
     private readonly InputAction m_Walking_Inventory;
     private readonly InputAction m_Walking_EatFood;
+    private readonly InputAction m_Walking_Reload;
     public struct WalkingActions
     {
         private @PlayerInput m_Wrapper;
@@ -420,6 +442,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @Settings => m_Wrapper.m_Walking_Settings;
         public InputAction @Inventory => m_Wrapper.m_Walking_Inventory;
         public InputAction @EatFood => m_Wrapper.m_Walking_EatFood;
+        public InputAction @Reload => m_Wrapper.m_Walking_Reload;
         public InputActionMap Get() { return m_Wrapper.m_Walking; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -462,6 +485,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @EatFood.started += instance.OnEatFood;
             @EatFood.performed += instance.OnEatFood;
             @EatFood.canceled += instance.OnEatFood;
+            @Reload.started += instance.OnReload;
+            @Reload.performed += instance.OnReload;
+            @Reload.canceled += instance.OnReload;
         }
 
         private void UnregisterCallbacks(IWalkingActions instance)
@@ -499,6 +525,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @EatFood.started -= instance.OnEatFood;
             @EatFood.performed -= instance.OnEatFood;
             @EatFood.canceled -= instance.OnEatFood;
+            @Reload.started -= instance.OnReload;
+            @Reload.performed -= instance.OnReload;
+            @Reload.canceled -= instance.OnReload;
         }
 
         public void RemoveCallbacks(IWalkingActions instance)
@@ -529,5 +558,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnSettings(InputAction.CallbackContext context);
         void OnInventory(InputAction.CallbackContext context);
         void OnEatFood(InputAction.CallbackContext context);
+        void OnReload(InputAction.CallbackContext context);
     }
 }
