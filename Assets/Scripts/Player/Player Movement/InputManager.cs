@@ -58,7 +58,6 @@ public class InputManager : MonoBehaviour
         walking.Inventory.performed += _ => InventoryUI();
         walking.EatFood.performed += _ => HealPlayer();
         walking.Reload.performed += _ => StartCoroutine(weaponholder.GetComponent<WeaponSwitching>().GetWeapon().GetComponent<Gun>().Reload());
-
     }
     
     // Update is called once per frame

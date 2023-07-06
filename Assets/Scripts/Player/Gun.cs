@@ -46,6 +46,7 @@ public class Gun : MonoBehaviour
         reloadWait = new WaitForSeconds(reloadTime);
         cam = Camera.main;
         player = GameObject.FindGameObjectWithTag("Player");
+        muzzleFlash.enabled = false;
     }
 
     public void shoot()
@@ -62,16 +63,16 @@ public class Gun : MonoBehaviour
             Damageable hitPtr = hit.collider.GetComponent<Damageable>();
             if (hitPtr != null)
             {
-                if(hitPtr.CompareTag("Dragon"))
+                if (hitPtr.CompareTag("Dragon"))
                 {
                     hitPtr.takeDamage(damage, hit.point, hit.normal);
                     if (hitPtr.CurrentHp <= 0)
                     {
                         player.GetComponent<LevelSystem>().GainExpRate(10);
                     }
-                } 
+                }
 
-                if(hitPtr.CompareTag("Boss"))
+                if (hitPtr.CompareTag("Boss"))
                 {
                     hitPtr.takeDamage(damage, hit.point, hit.normal);
                     if (hitPtr.CurrentHp <= 0)
@@ -79,11 +80,20 @@ public class Gun : MonoBehaviour
                         player.GetComponent<LevelSystem>().GainExpRate(50);
                     }
                 }
+
+                if (hitPtr.CompareTag("Environment"))
+                {
+                    hitPtr.takeDamage(0, hit.point, hit.normal);
+                }
+
+                if (hitPtr.CompareTag("Boxes"))
+                {
+                    hitPtr.takeDamage(0, hit.point, hit.normal);
+                }
             }
+            StartCoroutine(StopShooting(0.1f));
         }
-        StartCoroutine(StopShooting(0.1f));
     }
-   
     private IEnumerator SpawnTrail(TrailRenderer trail, RaycastHit hit)
     {
         float time = 0;

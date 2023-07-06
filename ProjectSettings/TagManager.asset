@@ -13,6 +13,7 @@ TagManager:
   - Boxes
   - Boss_Waypoints
   - Boss
+  - Environment
   layers:
   - Default
   - TransparentFX
