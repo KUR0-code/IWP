@@ -13,8 +13,7 @@ public class WFX_LightFlicker : MonoBehaviour
 	public float time = 0.05f;
 	
 	private float timer;
-	
-	void Start ()
+    void Start ()
 	{
 		timer = time;
 		StartCoroutine("Flicker");
@@ -25,14 +24,14 @@ public class WFX_LightFlicker : MonoBehaviour
 		while(true)
 		{
 			GetComponent<Light>().enabled = !GetComponent<Light>().enabled;
-			
 			do
 			{
 				timer -= Time.deltaTime;
 				yield return null;
 			}
-			while(timer > 0);
+			while (timer > 0);
 			timer = time;
+			time = Random.Range(1, 10) * 0.1f;
 		}
 	}
 }
