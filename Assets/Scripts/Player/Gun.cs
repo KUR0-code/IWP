@@ -56,21 +56,22 @@ public class Gun : MonoBehaviour
         {
             TrailRenderer trail = Instantiate(trailRenderer, BulletSpawnPoint.position, Quaternion.identity);
             StartCoroutine(SpawnTrail(trail, hit));
-            if (hit.collider.GetComponent<Damageable>() != null)
+            Damageable hitPtr = hit.collider.GetComponent<Damageable>();
+            if (hitPtr != null)
             {
-                if(hit.collider.GetComponent<Damageable>().CompareTag("Dragon"))
+                if(hitPtr.CompareTag("Dragon"))
                 {
-                    hit.collider.GetComponent<Damageable>().takeDamage(damage, hit.point, hit.normal);
-                    if (hit.collider.GetComponent<Damageable>().CurrentHp <= 0)
+                    hitPtr.takeDamage(damage, hit.point, hit.normal);
+                    if (hitPtr.CurrentHp <= 0)
                     {
                         player.GetComponent<LevelSystem>().GainExpRate(10);
                     }
                 } 
 
-                if(hit.collider.GetComponent<Damageable>().CompareTag("Boss"))
+                if(hitPtr.CompareTag("Boss"))
                 {
-                    hit.collider.GetComponent<Damageable>().takeDamage(damage, hit.point, hit.normal);
-                    if (hit.collider.GetComponent<Damageable>().CurrentHp <= 0)
+                    hitPtr.takeDamage(damage, hit.point, hit.normal);
+                    if (hitPtr.CurrentHp <= 0)
                     {
                         player.GetComponent<LevelSystem>().GainExpRate(50);
                     }

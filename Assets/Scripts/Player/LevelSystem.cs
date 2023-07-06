@@ -41,12 +41,6 @@ public class LevelSystem : MonoBehaviour
     void Update()
     {
         UpdateXpUI();
-
-        if (Enemy.GetComponent<Damageable>().died)
-        {
-            Enemy.GetComponent<Damageable>().died = false;
-            //Debug.Log("xp gained");
-        }
         if (currentXP > requiredXP)
         {
             LevelUp();
