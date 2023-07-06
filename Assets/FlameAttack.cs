@@ -25,7 +25,7 @@ public class FlameAttack : StateMachineBehaviour
         {
             if (DodgeChance == 1)
             {
-                player.gameObject.GetComponent<PlayerHealth>().TakeDamage(0);
+                // do nothing
             }
             else
             {

@@ -36,6 +36,8 @@ public class Gun : MonoBehaviour
     [SerializeField]
     private ParticleSystem ShootingSystem;
 
+    public Light muzzleFlash;
+
     GameObject player;
     void Awake()
     {
@@ -51,6 +53,7 @@ public class Gun : MonoBehaviour
         // the weapon the player is holding is a gun
         currentAmmo--;
         ShootingSystem.Play();
+        muzzleFlash.enabled = true;
 
         if (Physics.Raycast(BulletSpawnPoint.position, cam.transform.forward, out RaycastHit hit))
         {
@@ -150,5 +153,6 @@ public class Gun : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
         ShootingSystem.Stop();
+        muzzleFlash.enabled = false;
     }
 }
