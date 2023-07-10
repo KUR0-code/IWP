@@ -25,6 +25,7 @@ public class InputManager : MonoBehaviour
     
     bool CursorToggle = false;
     bool toggle = false;
+    bool FlashToggle = false;
 
     public GameObject player;
 
@@ -58,6 +59,7 @@ public class InputManager : MonoBehaviour
         walking.Inventory.performed += _ => InventoryUI();
         walking.EatFood.performed += _ => HealPlayer();
         walking.Reload.performed += _ => StartCoroutine(weaponholder.GetComponent<WeaponSwitching>().GetWeapon().GetComponent<Gun>().Reload());
+        walking.FlashLight.performed += _ => ToggleFlashLight();
     }
     
     // Update is called once per frame
@@ -129,5 +131,18 @@ public class InputManager : MonoBehaviour
         {
             StopCoroutine(fireCoroutine);
         }
+    }
+
+    private void ToggleFlashLight()
+    {
+        FlashToggle = !FlashToggle;
+        if (FlashToggle)
+        {
+            transform.GetChild(0).GetComponent<Light>().enabled = false;
+            Debug.Log("here");
+        }
+        else
+            transform.GetChild(0).GetComponent<Light>().enabled = true;
+
     }
 }

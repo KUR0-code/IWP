@@ -21,13 +21,13 @@ public class Gun : MonoBehaviour
     [SerializeField]
     int maxAmmo;
     public int currentAmmo;
-  
+
     public int totalAmmo;
 
     [SerializeField]
     float reloadTime;
     WaitForSeconds reloadWait;
-   
+
     [SerializeField]
     private Transform BulletSpawnPoint;
     [SerializeField]
@@ -39,6 +39,21 @@ public class Gun : MonoBehaviour
     public Light muzzleFlash;
 
     GameObject player;
+
+    public float recoilPercent = 0.3f;
+    public float recoverPercent = 0.7f;
+    public float recoilUp = 0.02f;
+    public float recoilBack = 0.08f;
+
+    private Vector3 OriginalPosition;
+    private Vector3 recoilVelocity = Vector3.zero;
+
+    private bool recoiling;
+    public bool recovering;
+
+    private float recoilLength;
+    private float recoverLength;
+
     void Awake()
     {
         rapidFireWait = new WaitForSeconds(1 / fireRate);
@@ -47,6 +62,25 @@ public class Gun : MonoBehaviour
         cam = Camera.main;
         player = GameObject.FindGameObjectWithTag("Player");
         muzzleFlash.enabled = false;
+
+        OriginalPosition = transform.localPosition;
+
+
+        recoilLength = 0;
+        recoverLength = 1 / fireRate * recoverPercent;
+    }
+
+    private void Update()
+    {
+        if (recoiling)
+        {
+            Recoil();
+        }
+
+        if (recovering)
+        {
+            Recovering();
+        }
     }
 
     public void shoot()
@@ -55,6 +89,8 @@ public class Gun : MonoBehaviour
         currentAmmo--;
         ShootingSystem.Play();
         muzzleFlash.enabled = true;
+        recoiling = true;
+        recovering = false;
 
         if (Physics.Raycast(BulletSpawnPoint.position, cam.transform.forward, out RaycastHit hit))
         {
@@ -113,9 +149,9 @@ public class Gun : MonoBehaviour
         if (CanShoot())
         {
             shoot();
-            if(rapidFire)
+            if (rapidFire)
             {
-                while(CanShoot())
+                while (CanShoot())
                 {
                     yield return rapidFireWait;
                     shoot();
@@ -134,7 +170,7 @@ public class Gun : MonoBehaviour
         if (currentAmmo != maxAmmo && totalAmmo >= 0)
         {
             int AmmoBuffer;
-           
+
             print("reloading");
             yield return reloadWait;
             AmmoBuffer = maxAmmo - currentAmmo;
@@ -143,21 +179,21 @@ public class Gun : MonoBehaviour
                 currentAmmo += AmmoBuffer;
                 totalAmmo -= AmmoBuffer;
             }
-           
+
             print("Finish reloading");
         }
     }
 
     bool CanShoot()
     {
-        if(currentAmmo > 0)
+        if (currentAmmo > 0)
         {
             return true;
         }
         else
         {
             return false;
-        } 
+        }
     }
 
     IEnumerator StopShooting(float time)
@@ -165,5 +201,31 @@ public class Gun : MonoBehaviour
         yield return new WaitForSeconds(time);
         ShootingSystem.Stop();
         muzzleFlash.enabled = false;
+    }
+
+    void Recoil()
+    {
+        Vector3 finalPosition = new Vector3(OriginalPosition.x, OriginalPosition.y + recoilUp, OriginalPosition.z - recoilBack);
+
+        transform.localPosition = Vector3.SmoothDamp(transform.localPosition, finalPosition, ref recoilVelocity, recoilLength);
+
+        if (transform.localPosition == finalPosition)
+        {
+            recoiling = false;
+            recovering = true;
+        }
+    }
+
+    void Recovering()
+    {
+        Vector3 finalPosition = OriginalPosition;
+
+        transform.localPosition = Vector3.SmoothDamp(transform.localPosition, finalPosition, ref recoilVelocity, recoverLength);
+
+        if (transform.localPosition == finalPosition)
+        {
+            recoiling = false;
+            recovering = false;
+        }
     }
 }
