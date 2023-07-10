@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class FlameAttack : StateMachineBehaviour
 {
     Transform player;
     float attackTimer;
     int DodgeChance;
+    public GameObject dodgeMessage;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -20,12 +20,13 @@ public class FlameAttack : StateMachineBehaviour
         animator.transform.LookAt(player);
         float distance = Vector3.Distance(player.position, animator.transform.position);
         attackTimer += Time.deltaTime;
-        DodgeChance = Random.Range(1, 10);
+        DodgeChance = 1; // Random.Range(1, 10);
         if (attackTimer >= 2)
         {
             if (DodgeChance == 1)
             {
                 // do nothing
+                dodgeMessage.GetComponent<PlayerDodge>().dodge = true;
             }
             else
             {

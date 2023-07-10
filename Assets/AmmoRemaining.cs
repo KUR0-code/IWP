@@ -7,8 +7,6 @@ public class AmmoRemaining : MonoBehaviour
 {
     public TextMeshProUGUI textDisplay;
     [SerializeField]
-    Gun gun;
-    [SerializeField]
     private GameObject weaponholder;
 
     string currentAmmo;
@@ -25,7 +23,6 @@ public class AmmoRemaining : MonoBehaviour
         currentAmmo = weaponholder.GetComponent<WeaponSwitching>().GetWeapon().GetComponent<Gun>().currentAmmo.ToString();
         totalAmmo = weaponholder.GetComponent<WeaponSwitching>().GetWeapon().GetComponent<Gun>().totalAmmo.ToString();
 
-        gun = weaponholder.GetComponent<WeaponSwitching>().GetWeapon().GetComponent<Gun>();
         textDisplay.text = currentAmmo + " / " + totalAmmo;
     }
 }

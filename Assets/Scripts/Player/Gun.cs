@@ -83,6 +83,7 @@ public class Gun : MonoBehaviour
 
                 if (hitPtr.CompareTag("Environment"))
                 {
+                    Debug.Log(hit.collider.gameObject.name);
                     hitPtr.takeDamage(0, hit.point, hit.normal);
                 }
 
