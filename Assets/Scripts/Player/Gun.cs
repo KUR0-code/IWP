@@ -8,6 +8,9 @@ public class Gun : MonoBehaviour
 {
     Camera cam;
 
+    public GameObject instantiateGunRifleAmmo;
+    public GameObject instantiateGunPistolAmmo;
+
     [SerializeField]
     float damage = 10f;
 
@@ -18,8 +21,7 @@ public class Gun : MonoBehaviour
     [SerializeField]
     bool rapidFire = false;
 
-    [SerializeField]
-    int maxAmmo;
+    public int maxAmmo;
     public int currentAmmo;
 
     public int totalAmmo;
@@ -56,6 +58,10 @@ public class Gun : MonoBehaviour
 
     public AudioSource Src;
     public AudioClip SFX1, SFX2;
+
+    int ammoDrop;
+    public InventoryObject inventory;
+
 
     private void PlaySFX1()
     {
@@ -104,6 +110,15 @@ public class Gun : MonoBehaviour
         // the weapon the player is holding is a gun
         PlaySFX1();
         currentAmmo--;
+        if(rapidFire)
+        {
+            inventory.RemoveBulletAr();
+        }
+        else
+        {
+            inventory.RemoveBulletPistol();
+        }
+
         ShootingSystem.Play();
         muzzleFlash.enabled = true;
         recoiling = true;
@@ -121,7 +136,9 @@ public class Gun : MonoBehaviour
                     hitPtr.takeDamage(damage, hit.point, hit.normal);
                     if (hitPtr.CurrentHp <= 0)
                     {
+                        hitPtr.GetComponent<Damageable>().Die();
                         player.GetComponent<LevelSystem>().GainExpRate(10);
+                        AmmoDropRange(hitPtr.gameObject.transform.position);
                     }
                 }
 
@@ -130,6 +147,7 @@ public class Gun : MonoBehaviour
                     hitPtr.takeDamage(damage, hit.point, hit.normal);
                     if (hitPtr.CurrentHp <= 0)
                     {
+                        hitPtr.GetComponent<Damageable>().Die();
                         player.GetComponent<LevelSystem>().GainExpRate(50);
                     }
                 }
@@ -146,6 +164,23 @@ public class Gun : MonoBehaviour
                 }
             }
             StartCoroutine(StopShooting(0.1f));
+        }
+    }
+
+    private void AmmoDropRange(Vector3 HitPosition)
+    {
+        ammoDrop = Random.Range(1, 2);
+        switch (ammoDrop)
+        {
+            case 1:
+                Instantiate(instantiateGunRifleAmmo, HitPosition, Quaternion.identity);
+                break;
+            case 2:
+                Instantiate(instantiateGunPistolAmmo, HitPosition, Quaternion.identity);
+                break;
+            case 3:
+                break;
+
         }
     }
     private IEnumerator SpawnTrail(TrailRenderer trail, RaycastHit hit)

@@ -33,7 +33,7 @@ public class WeaponSwitching : MonoBehaviour
             if (Input.GetKeyDown(keys[i]) && selectedWeapon != i && timeSinceLastSwitch >= switchTime)
             {
                 selectedWeapon = i;
-                Select(selectedWeapon);
+                Select(selectedWeapon); 
             }
         }
     }
@@ -41,9 +41,13 @@ public class WeaponSwitching : MonoBehaviour
     {
         return transform.GetChild(selectedWeapon);
     }
+
+    public Transform GetNextWeapon()
+    {
+        return transform.GetChild(selectedWeapon + 1);
+    }
     private void Update()
     {
-
         timeSinceLastSwitch += Time.deltaTime;
         SetWeapons();
     }

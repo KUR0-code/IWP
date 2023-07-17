@@ -93,7 +93,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2293895311696396661, guid: df76ee1ef78dfe54088e3d200a907eae, type: 3}
       propertyPath: m_text
-      value: 12
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2293895311696396661, guid: df76ee1ef78dfe54088e3d200a907eae, type: 3}
       propertyPath: m_VerticalAlignment
@@ -109,19 +109,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7202116933435595931, guid: df76ee1ef78dfe54088e3d200a907eae, type: 3}
       propertyPath: m_Name
-      value: Image 1 Variant
+      value: Ar Ammo
       objectReference: {fileID: 0}
     - target: {fileID: 8970439769219553907, guid: df76ee1ef78dfe54088e3d200a907eae, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 21300000, guid: 28292eef916cca440bf2d2e058d7c669, type: 3}
     - target: {fileID: 8970439769219553907, guid: df76ee1ef78dfe54088e3d200a907eae, type: 3}
       propertyPath: m_Color.b
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8970439769219553907, guid: df76ee1ef78dfe54088e3d200a907eae, type: 3}
       propertyPath: m_Color.g
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8970439769219553907, guid: df76ee1ef78dfe54088e3d200a907eae, type: 3}
       propertyPath: m_Color.r

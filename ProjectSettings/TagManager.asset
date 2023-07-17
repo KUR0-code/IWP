@@ -14,6 +14,8 @@ TagManager:
   - Boss_Waypoints
   - Boss
   - Environment
+  - Rifle
+  - Pistol
   layers:
   - Default
   - TransparentFX

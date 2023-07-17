@@ -5,14 +5,13 @@ using UnityEngine.UI;
 
 public class Damageable : MonoBehaviour
 {
-    [SerializeField]
     public float maxHp = 100f;
     public float CurrentHp;
     [SerializeField]
     GameObject hitEffect;
-    [SerializeField]
     public bool died = false;
-    public Animator Animator;
+    [SerializeField]
+    private Animator Animator;
     float StunTimer;
 
     // Start is called before the first frame update
@@ -32,12 +31,7 @@ public class Damageable : MonoBehaviour
     {
         Instantiate(hitEffect, HitPos, Quaternion.LookRotation(HitNormal));
         CurrentHp -= damage;
-        if(CurrentHp <= 0 )
-        {
-            //play animation
-            Die();
-        }
-        else if (CurrentHp >= 0)
+        if (CurrentHp >= 0)
         {
             if (StunTimer >= 5)
             {
@@ -56,7 +50,6 @@ public class Damageable : MonoBehaviour
     {
         print(name + " was destroyed");
         Animator.SetTrigger("Die");
-        GetComponent<Collider>().enabled = false;
         died = true;
     }
 }

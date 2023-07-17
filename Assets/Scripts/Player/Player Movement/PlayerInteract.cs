@@ -13,6 +13,7 @@ public class PlayerInteract : MonoBehaviour
     private InputManager inputManager;
 
     public InventoryObject inventory;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +21,7 @@ public class PlayerInteract : MonoBehaviour
         cam = GetComponent<PlayerLook>().cam;
         playerUI = GetComponent<PlayerUI>();
         inputManager = GetComponent<InputManager>();
+       
     }
 
     // Update is called once per frame
@@ -49,12 +51,17 @@ public class PlayerInteract : MonoBehaviour
                         if(!Hit.collider.GetComponent<Medkit>().HasOpened)
                             inventory.AddItem(item.item, Hit.collider.GetComponent<Medkit>().count);
                     }
-                   
-                    //if (item)
-                    //{
-                    //    inventory.AddItem(item.item, 1);
-                    //    Destroy(Hit.collider.GetComponent<Item>().gameObject);
-                    //}
+
+                    if (Hit.collider.CompareTag("Rifle"))
+                    {
+                        inventory.AddItem(item.item, 15);
+                        Destroy(Hit.collider.GetComponent<Item>().gameObject);
+                    }  
+                    if (Hit.collider.CompareTag("Pistol"))
+                    {
+                        inventory.AddItem(item.item, 5);
+                        Destroy(Hit.collider.GetComponent<Item>().gameObject);
+                    }
                 }
             }
         }

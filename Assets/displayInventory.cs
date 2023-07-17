@@ -13,11 +13,24 @@ public class displayInventory : MonoBehaviour
     public int Column;
     public int Y_SpaceBetweenitems;
 
+    public GameObject WeaponHolder;
+
     Dictionary<InventorySlot, GameObject> itemsDisplayed = new Dictionary<InventorySlot, GameObject>();
     // Start is called before the first frame update
     void Start()
     {
         CreateDisplay();
+
+        inventory.AddItem(
+          WeaponHolder.GetComponent<WeaponSwitching>().GetWeapon().GetComponent<Gun>().GetComponent<Item>().item,
+          WeaponHolder.GetComponent<WeaponSwitching>().GetWeapon().GetComponent<Gun>().maxAmmo +
+          WeaponHolder.GetComponent<WeaponSwitching>().GetWeapon().GetComponent<Gun>().totalAmmo);
+        
+        inventory.AddItem(
+          WeaponHolder.GetComponent<WeaponSwitching>().GetNextWeapon().GetComponent<Gun>().GetComponent<Item>().item,
+          WeaponHolder.GetComponent<WeaponSwitching>().GetNextWeapon().GetComponent<Gun>().maxAmmo +
+          WeaponHolder.GetComponent<WeaponSwitching>().GetNextWeapon().GetComponent<Gun>().totalAmmo);
+
     }
 
     // Update is called once per frame

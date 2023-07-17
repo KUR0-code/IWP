@@ -5,7 +5,6 @@ using UnityEngine;
 public class InventoryObject : ScriptableObject
 {
     public List<InventorySlot> Container = new List<InventorySlot>();
-
     public void AddItem(ItemObject _item, int _amount)
     {
         bool HasItem = false;
@@ -42,8 +41,39 @@ public class InventoryObject : ScriptableObject
         }
         return false;
     }
-      
+    
+    public void RemoveBulletAr()
+    {
+        for (int i = 0; i < Container.Count; i++)
+        {
+            if (Container[i].item.type == ItemType.Ar && Container[i].amount >= 1)
+            {
+                Container[i].amount -= 1;
+                if (Container[i].amount <= 0)
+                {
+                    Container[i].amount = 0;
+                }
+            }
+           
+    }
+    }
+    public void RemoveBulletPistol()
+    {
+        for (int i = 0; i < Container.Count; i++)
+        {
+            if (Container[i].item.type == ItemType.Pistol && Container[i].amount >= 1)
+            {
+                Container[i].amount -= 1;
+                if (Container[i].amount <= 0)
+                {
+                    Container[i].amount = 0;
+                }
+            }
+        }
+    }
+            
 }
+
 
 [System.Serializable]
 public class InventorySlot

@@ -6,6 +6,8 @@ public enum ItemType
 {
     Food,
     Equipment,
+    Ar,
+    Pistol,
     Default
 }
 

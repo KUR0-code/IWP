@@ -13,7 +13,5 @@ MonoBehaviour:
   m_Name: Bones
   m_EditorClassIdentifier: 
   prefab: {fileID: 2617633588752033760, guid: 25b57d4323521894fb14be4fea72ea48, type: 3}
-  type: 2
-  description: 'left over bones
-
-'
+  type: 4
+  description: 
