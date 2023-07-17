@@ -192,6 +192,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ee163269f3f10a4e98c4a29e5c14705, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FlameVFX: {fileID: 648957652171375548, guid: c79465a1bec183d4bbab963be8d27e73, type: 3}
+  isBoss: 0
 --- !u!91 &9100000
 AnimatorController:
   m_ObjectHideFlags: 0
@@ -318,7 +320,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 347d2e064d3a3f946b17655dcc998386, type: 3}
+  m_Motion: {fileID: 7400000, guid: 4b1dcfc331de54549a94b650385f751e, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

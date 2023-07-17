@@ -11,6 +11,7 @@ public class PlayerDodge : MonoBehaviour
     void Start()
     {
         dodge = false;
+        textDisplay.color = new Color(textDisplay.color.r, textDisplay.color.g, textDisplay.color.b, 0);
         disappearTime = 0;
     }
 
@@ -20,9 +21,8 @@ public class PlayerDodge : MonoBehaviour
         if(dodge)
         {
             disappearTime += Time.deltaTime;
-            if(disappearTime <= 0.5)
+            if(disappearTime <= 0.1f)
             {
-                Debug.Log("here");
                 textDisplay.text = "Dodge!";
                 dodge = false;  
             }
@@ -37,7 +37,7 @@ public class PlayerDodge : MonoBehaviour
 
     private IEnumerator FadeOutCR()
     {
-        float duration = 0.5f; //0.5 secs
+        float duration = 1.5f; //0.5 secs
         float currentTime = 0f;
         while (currentTime < duration)
         {

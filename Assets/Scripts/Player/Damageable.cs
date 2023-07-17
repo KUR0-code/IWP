@@ -37,7 +37,7 @@ public class Damageable : MonoBehaviour
             //play animation
             Die();
         }
-        else
+        else if (CurrentHp >= 0)
         {
             if (StunTimer >= 5)
             {

@@ -236,6 +236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ee163269f3f10a4e98c4a29e5c14705, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBoss: 1
 --- !u!1101 &-3453604926422282957
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
