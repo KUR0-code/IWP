@@ -54,22 +54,6 @@ public class Gun : MonoBehaviour
     private float recoilLength;
     private float recoverLength;
 
-    public AudioSource Src;
-    public AudioClip SFX1, SFX2;
-
-    private void PlaySFX1()
-    {
-        // shoot
-        Src.clip = SFX1;
-        Src.Play();
-    }
-    private void PlaySFX2()
-    {
-        // reload
-        Src.clip = SFX2;
-        Src.Play();
-    }
-
     void Awake()
     {
         rapidFireWait = new WaitForSeconds(1 / fireRate);
@@ -102,13 +86,12 @@ public class Gun : MonoBehaviour
     public void shoot()
     {
         // the weapon the player is holding is a gun
-        PlaySFX1();
         currentAmmo--;
         ShootingSystem.Play();
         muzzleFlash.enabled = true;
         recoiling = true;
         recovering = false;
-        CameraShake.Invoke();
+
         if (Physics.Raycast(BulletSpawnPoint.position, cam.transform.forward, out RaycastHit hit))
         {
             TrailRenderer trail = Instantiate(trailRenderer, BulletSpawnPoint.position, Quaternion.identity);
@@ -136,7 +119,7 @@ public class Gun : MonoBehaviour
 
                 if (hitPtr.CompareTag("Environment"))
                 {
-                    // Debug.Log(hit.collider.gameObject.name);
+                    Debug.Log(hit.collider.gameObject.name);
                     hitPtr.takeDamage(0, hit.point, hit.normal);
                 }
 
@@ -184,29 +167,19 @@ public class Gun : MonoBehaviour
     }
     public IEnumerator Reload()
     {
-        int AmmoBuffer;
-        muzzleFlash.enabled = false;
-        PlaySFX2();
         if (currentAmmo != maxAmmo && totalAmmo >= 0)
-        {    
+        {
+            int AmmoBuffer;
+
+            print("reloading");
+            yield return reloadWait;
             AmmoBuffer = maxAmmo - currentAmmo;
-            if(AmmoBuffer <= totalAmmo)
+            if (AmmoBuffer > 0 && AmmoBuffer <= totalAmmo)
             {
-                print("reloading");
-                yield return reloadWait;
-                if (AmmoBuffer >= 1)
-                {
-                    currentAmmo += AmmoBuffer;
-                    totalAmmo -= AmmoBuffer;
-                }
+                currentAmmo += AmmoBuffer;
+                totalAmmo -= AmmoBuffer;
             }
-            else
-            {
-                print("reloading");
-                yield return reloadWait;
-                currentAmmo += totalAmmo;
-                totalAmmo = 0;
-            }
+
             print("Finish reloading");
         }
     }

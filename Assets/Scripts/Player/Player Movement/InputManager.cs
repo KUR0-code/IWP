@@ -16,15 +16,16 @@ public class InputManager : MonoBehaviour
     private GameObject weaponholder;
 
     Coroutine fireCoroutine;
+    [SerializeField]
+    private ParticleSystem ShootingSystem;
 
-    // public GameObject SettingUI;
+    GameObject SettingUI;
 
     public GameObject inventoryUI;
     
     bool CursorToggle = false;
     bool toggle = false;
     bool FlashToggle = false;
-    public GameObject flashLight;
 
     public GameObject player;
 
@@ -40,8 +41,8 @@ public class InputManager : MonoBehaviour
         movement = GetComponent<PlayerMovement>();
         look = GetComponent<PlayerLook>();
 
-        
-        // SettingUI.SetActive(false);
+        SettingUI = GameObject.FindGameObjectWithTag("Settings");
+        SettingUI.gameObject.SetActive(false);
 
         inventoryUI = GameObject.FindGameObjectWithTag("Inventory");
         inventoryUI.gameObject.SetActive(false);
@@ -97,13 +98,13 @@ public class InputManager : MonoBehaviour
         CursorToggle = !CursorToggle;
         if (CursorToggle)
         {
-            // SettingUI.SetActive(true);
+            SettingUI.gameObject.SetActive(true);
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = true;
         }
         else
         {
-            // SettingUI.SetActive(false);
+            SettingUI.gameObject.SetActive(false);
             Cursor.visible = false;
         }
     }
@@ -137,17 +138,11 @@ public class InputManager : MonoBehaviour
         FlashToggle = !FlashToggle;
         if (FlashToggle)
         {
-            flashLight.GetComponent<Light>().enabled = false;
-            // Debug.Log("here");
+            transform.GetChild(0).GetComponent<Light>().enabled = false;
+            Debug.Log("here");
         }
         else
-            flashLight.GetComponent<Light>().enabled = true;
+            transform.GetChild(0).GetComponent<Light>().enabled = true;
 
     }
-
-    public void TestFunc()
-    {
-        Debug.Log("Entered");
-    }
-     
 }
