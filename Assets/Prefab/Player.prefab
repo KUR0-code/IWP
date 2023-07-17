@@ -135,7 +135,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gun: {fileID: 0}
-  ShootingSystem: {fileID: 0}
+  weaponholder: {fileID: 0}
+  inventoryUI: {fileID: 0}
+  player: {fileID: 0}
+  healingPotion: {fileID: 0}
 --- !u!114 &4746983560859563986
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,6 +170,7 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 64
+  inventory: {fileID: 0}
 --- !u!114 &4746983560859563984
 MonoBehaviour:
   m_ObjectHideFlags: 0
