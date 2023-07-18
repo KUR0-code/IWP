@@ -7,24 +7,30 @@ public class RegendHealth : StateMachineBehaviour
     GameObject Boss;
     float BossHealth;
     float RegendHp;
+    bool Healed;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         Boss = GameObject.FindGameObjectWithTag("Boss");
         BossHealth = Boss.GetComponent<Damageable>().CurrentHp;
         RegendHp = Boss.GetComponent<Damageable>().maxHp / 3;
-        BossHealth += Boss.GetComponent<Damageable>().RegendHealth(RegendHp);
-        if (BossHealth >= Boss.GetComponent<Damageable>().maxHp)
-        {
-            BossHealth = Boss.GetComponent<Damageable>().maxHp;
-        }
-        
+        Healed = false;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        
+        if(!Healed)
+        {
+            BossHealth += Boss.GetComponent<Damageable>().RegendHealth(RegendHp);
+            if (BossHealth >= Boss.GetComponent<Damageable>().maxHp)
+            {
+                BossHealth = Boss.GetComponent<Damageable>().maxHp;
+            }
+            Healed = true;
+            animator.SetBool("isChasing", true);
+        }
+       
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

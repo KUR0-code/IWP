@@ -62,6 +62,8 @@ public class Gun : MonoBehaviour
     int ammoDrop;
     public InventoryObject inventory;
 
+    public PlayerInteract playerInteract;
+
 
     private void PlaySFX1()
     {
@@ -103,6 +105,17 @@ public class Gun : MonoBehaviour
         {
             Recovering();
         }
+
+        if(playerInteract.collectedRifle)
+        {
+            totalAmmo += playerInteract.AddRifleAmmo;
+            playerInteract.collectedRifle = false;
+        } 
+        else if(playerInteract.collectedPistol)
+        {
+            totalAmmo += playerInteract.AddPistolAmmo;
+            playerInteract.collectedPistol = false;
+        }
     }
 
     public void shoot()
@@ -136,7 +149,6 @@ public class Gun : MonoBehaviour
                     hitPtr.takeDamage(damage, hit.point, hit.normal);
                     if (hitPtr.CurrentHp <= 0)
                     {
-                        hitPtr.GetComponent<Damageable>().Die();
                         player.GetComponent<LevelSystem>().GainExpRate(10);
                         AmmoDropRange(hitPtr.gameObject.transform.position);
                     }
@@ -147,7 +159,6 @@ public class Gun : MonoBehaviour
                     hitPtr.takeDamage(damage, hit.point, hit.normal);
                     if (hitPtr.CurrentHp <= 0)
                     {
-                        hitPtr.GetComponent<Damageable>().Die();
                         player.GetComponent<LevelSystem>().GainExpRate(50);
                     }
                 }
@@ -169,11 +180,12 @@ public class Gun : MonoBehaviour
 
     private void AmmoDropRange(Vector3 HitPosition)
     {
-        ammoDrop = Random.Range(1, 2);
+        ammoDrop = Random.Range(1, 10);
         switch (ammoDrop)
         {
             case 1:
                 Instantiate(instantiateGunRifleAmmo, HitPosition, Quaternion.identity);
+                Debug.Log("Here");
                 break;
             case 2:
                 Instantiate(instantiateGunPistolAmmo, HitPosition, Quaternion.identity);
@@ -219,29 +231,27 @@ public class Gun : MonoBehaviour
     }
     public IEnumerator Reload()
     {
-        int AmmoBuffer;
-        muzzleFlash.enabled = false;
         PlaySFX2();
-        if (currentAmmo != maxAmmo && totalAmmo >= 0)
-        {    
-            AmmoBuffer = maxAmmo - currentAmmo;
-            if(AmmoBuffer <= totalAmmo)
-            {
-                print("reloading");
-                yield return reloadWait;
-                if (AmmoBuffer >= 1)
-                {
-                    currentAmmo += AmmoBuffer;
-                    totalAmmo -= AmmoBuffer;
-                }
-            }
-            else
-            {
-                print("reloading");
-                yield return reloadWait;
-                currentAmmo += totalAmmo;
-                totalAmmo = 0;
-            }
+        muzzleFlash.enabled = false;
+
+        int AmmoBuffer;
+
+        AmmoBuffer = maxAmmo - currentAmmo;
+
+        if(AmmoBuffer > 0 && totalAmmo >= AmmoBuffer)
+        {
+            print("reloading");
+            yield return reloadWait;
+            currentAmmo += AmmoBuffer;
+            totalAmmo -= AmmoBuffer;
+            print("Finish reloading");
+        }
+        else if(AmmoBuffer > 0 && totalAmmo <= AmmoBuffer)
+        {
+            print("reloading");
+            yield return reloadWait;
+            currentAmmo += totalAmmo;
+            totalAmmo = 0;
             print("Finish reloading");
         }
     }

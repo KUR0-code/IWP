@@ -44910,7 +44910,6 @@ MonoBehaviour:
   X_SpaceBetweenitems: 120
   Column: 3
   Y_SpaceBetweenitems: 120
-  WeaponHolder: {fileID: 1398567994}
 --- !u!1 &1937518790 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1183404977318064, guid: 695aa4942897a40e6a9b55f63cfbce2a, type: 3}
@@ -49076,6 +49075,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4746983560859563987, guid: 2bf73fbaf558a2a47a117b8b11ddfe2a, type: 3}
+      propertyPath: inventory
+      value: 
+      objectReference: {fileID: 11400000, guid: 28224279d6aaf8d4f99d590017bbdf13, type: 2}
+    - target: {fileID: 4746983560859563987, guid: 2bf73fbaf558a2a47a117b8b11ddfe2a, type: 3}
       propertyPath: flashLight
       value: 
       objectReference: {fileID: 365018292}
@@ -49099,6 +49102,10 @@ PrefabInstance:
       propertyPath: inventoryObject
       value: 
       objectReference: {fileID: 11400000, guid: 28224279d6aaf8d4f99d590017bbdf13, type: 2}
+    - target: {fileID: 4746983560859563987, guid: 2bf73fbaf558a2a47a117b8b11ddfe2a, type: 3}
+      propertyPath: DisplayInventory
+      value: 
+      objectReference: {fileID: 1936453604}
     - target: {fileID: 4746983560859563988, guid: 2bf73fbaf558a2a47a117b8b11ddfe2a, type: 3}
       propertyPath: gun
       value: 

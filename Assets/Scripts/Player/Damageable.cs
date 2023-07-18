@@ -31,7 +31,11 @@ public class Damageable : MonoBehaviour
     {
         Instantiate(hitEffect, HitPos, Quaternion.LookRotation(HitNormal));
         CurrentHp -= damage;
-        if (CurrentHp >= 0)
+        if(CurrentHp <=0)
+        {
+            Die();
+        }
+        else if (CurrentHp >= 0)
         {
             if (StunTimer >= 5)
             {
@@ -50,6 +54,7 @@ public class Damageable : MonoBehaviour
     {
         print(name + " was destroyed");
         Animator.SetTrigger("Die");
+        Animator.GetComponent<Collider>().enabled = false;
         died = true;
     }
 }

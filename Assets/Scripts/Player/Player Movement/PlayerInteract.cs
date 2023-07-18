@@ -13,7 +13,11 @@ public class PlayerInteract : MonoBehaviour
     private InputManager inputManager;
 
     public InventoryObject inventory;
-    
+
+    public int AddRifleAmmo;
+    public int AddPistolAmmo;
+    public bool collectedRifle;
+    public bool collectedPistol;
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +25,12 @@ public class PlayerInteract : MonoBehaviour
         cam = GetComponent<PlayerLook>().cam;
         playerUI = GetComponent<PlayerUI>();
         inputManager = GetComponent<InputManager>();
-       
+
+        AddRifleAmmo = 15;
+        AddPistolAmmo = 5;
+        collectedRifle = false;
+        collectedPistol = false;
+
     }
 
     // Update is called once per frame
@@ -54,13 +63,16 @@ public class PlayerInteract : MonoBehaviour
 
                     if (Hit.collider.CompareTag("Rifle"))
                     {
-                        inventory.AddItem(item.item, 15);
                         Destroy(Hit.collider.GetComponent<Item>().gameObject);
+                        inventory.AddItem(item.item, AddRifleAmmo);
+                        collectedRifle = true;
+
                     }  
                     if (Hit.collider.CompareTag("Pistol"))
                     {
-                        inventory.AddItem(item.item, 5);
+                        inventory.AddItem(item.item, AddPistolAmmo);
                         Destroy(Hit.collider.GetComponent<Item>().gameObject);
+                        collectedPistol = true;
                     }
                 }
             }

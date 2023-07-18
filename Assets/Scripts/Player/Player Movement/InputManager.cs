@@ -32,6 +32,10 @@ public class InputManager : MonoBehaviour
 
     public HealingPotion healingPotion;
 
+    public InventoryObject inventory;
+    public displayInventory DisplayInventory;
+
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -59,6 +63,17 @@ public class InputManager : MonoBehaviour
         walking.EatFood.performed += _ => HealPlayer();
         walking.Reload.performed += _ => StartCoroutine(weaponholder.GetComponent<WeaponSwitching>().GetWeapon().GetComponent<Gun>().Reload());
         walking.FlashLight.performed += _ => ToggleFlashLight();
+
+        DisplayInventory.GetComponent<displayInventory>().CreateDisplay();
+        inventory.AddItem(
+          weaponholder.GetComponent<WeaponSwitching>().GetWeapon().GetComponent<Gun>().GetComponent<Item>().item,
+          weaponholder.GetComponent<WeaponSwitching>().GetWeapon().GetComponent<Gun>().maxAmmo +
+          weaponholder.GetComponent<WeaponSwitching>().GetWeapon().GetComponent<Gun>().totalAmmo);
+
+        inventory.AddItem(
+         weaponholder.GetComponent<WeaponSwitching>().GetNextWeapon().GetComponent<Gun>().GetComponent<Item>().item,
+         weaponholder.GetComponent<WeaponSwitching>().GetNextWeapon().GetComponent<Gun>().maxAmmo +
+         weaponholder.GetComponent<WeaponSwitching>().GetNextWeapon().GetComponent<Gun>().totalAmmo);
     }
     
     // Update is called once per frame

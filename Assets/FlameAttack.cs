@@ -39,16 +39,19 @@ public class FlameAttack : StateMachineBehaviour
                  player.gameObject.GetComponent<PlayerHealth>().TakeDamage(40);
             }
             animator.GetComponent<FlameVFX>().StopFireVFX();
-
             attackTimer = 0;
         }
         if (distance > 10f)
         {
             animator.SetBool("AttackPattern2", false);
+            animator.GetComponent<FlameVFX>().StopFireVFX();
+
         }
-        if(distance < 6f)
+        if (distance < 6f)
         {
             animator.SetBool("isAttacking", true);
+            animator.GetComponent<FlameVFX>().StopFireVFX();
+
         }
     }
 
