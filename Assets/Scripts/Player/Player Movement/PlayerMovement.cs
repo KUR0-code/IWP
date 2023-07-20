@@ -15,6 +15,30 @@ public class PlayerMovement : MonoBehaviour
     private bool sprinting;
     private float crouchTimer;
 
+    public AudioSource Src;
+    public AudioClip WalkingSFX, JumpingSFX, RunningSFX;
+
+
+    private void WalkingSFXClip()
+    {
+        Src.clip = WalkingSFX;
+        Src.Play();
+    }
+
+    private void JumpingSFXClip()
+    {
+       
+        Src.clip = JumpingSFX;
+        Src.PlayDelayed(0.2f);
+    }
+    private void RunningSFXClip()
+    {
+        
+        Src.clip = RunningSFX;
+        Src.Play();
+    }
+
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -22,7 +46,6 @@ public class PlayerMovement : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-
     }
 
     // Update is called once per frame
@@ -48,8 +71,6 @@ public class PlayerMovement : MonoBehaviour
                 crouchTimer = 0f;
             }
         }
-
-       
     }
 
     // Receive the input from the input manager script
@@ -58,14 +79,19 @@ public class PlayerMovement : MonoBehaviour
         Vector3 moveDir = Vector3.zero;
         moveDir.x = Input.x;
         moveDir.z = Input.y;
-        controller.Move(transform.TransformDirection(moveDir) * speed * Time.deltaTime);
+        controller.Move(speed * Time.deltaTime * transform.TransformDirection(moveDir));
 
         playerVelocity.y += gravity * Time.deltaTime;
-        if (isGrounded && playerVelocity.y <0)
+        if (isGrounded && playerVelocity.y < 0)
         {
             playerVelocity.y = -2f;
         }
+        if(!isGrounded && playerVelocity.y >0)
+        {
+            JumpingSFXClip();
+        }
         controller.Move(playerVelocity * Time.deltaTime);
+        // WalkingSFXClip();
     }
 
     public void Jump()
@@ -89,9 +115,14 @@ public class PlayerMovement : MonoBehaviour
         if (sprinting)
         {
             speed = 8;
+            Src.clip = RunningSFX;
+            Src.Play();
         }
         else
         {
+            Src.clip = RunningSFX;
+            Src.Stop();
+            WalkingSFXClip();
             speed = 5;
         }
     }

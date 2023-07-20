@@ -101,9 +101,9 @@ public class InputManager : MonoBehaviour
     {
         toggle = !toggle;
         if(toggle)
-            inventoryUI.gameObject.SetActive(true);
+            inventoryUI.SetActive(true);
         else
-            inventoryUI.gameObject.SetActive(false);
+            inventoryUI.SetActive(false);
 
     }
 
@@ -159,10 +159,4 @@ public class InputManager : MonoBehaviour
             flashLight.GetComponent<Light>().enabled = true;
 
     }
-
-    public void TestFunc()
-    {
-        Debug.Log("Entered");
-    }
-     
 }

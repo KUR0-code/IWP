@@ -10017,8 +10017,6 @@ GameObject:
   - component: {fileID: 4168231105908244}
   - component: {fileID: 33310659514095078}
   - component: {fileID: 23764622228272510}
-  - component: {fileID: 8523180824949194482}
-  - component: {fileID: 5340298746229857425}
   m_Layer: 0
   m_Name: Wall_Door_01
   m_TagString: Untagged
@@ -10091,36 +10089,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &8523180824949194482
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1423518582033834}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 10, y: 2.000002, z: 6}
-  m_Center: {x: 3, y: -0.99999976, z: 3.000001}
---- !u!114 &5340298746229857425
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1423518582033834}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f40abd2a53785140a01e690138fc524, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHp: 1e+9
-  CurrentHp: 0
-  hitEffect: {fileID: 100002, guid: ba261927bb2ae4244b20b0eb77a96415, type: 3}
-  died: 0
-  Animator: {fileID: 0}
 --- !u!1 &1424751852001524
 GameObject:
   m_ObjectHideFlags: 0
@@ -17179,8 +17147,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4692062974380522}
-  - component: {fileID: 3692066976211964982}
-  - component: {fileID: 6845957015236723517}
   m_Layer: 0
   m_Name: Room_03
   m_TagString: Untagged
@@ -17325,36 +17291,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!65 &3692066976211964982
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1785033800017144}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6845957015236723517
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1785033800017144}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f40abd2a53785140a01e690138fc524, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHp: 100
-  CurrentHp: 0
-  hitEffect: {fileID: 100002, guid: ba261927bb2ae4244b20b0eb77a96415, type: 3}
-  died: 0
-  Animator: {fileID: 0}
 --- !u!1 &1786882575305578
 GameObject:
   m_ObjectHideFlags: 0
