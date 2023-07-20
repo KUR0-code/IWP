@@ -48,7 +48,7 @@ public class InputManager : MonoBehaviour
         // SettingUI.SetActive(false);
 
         inventoryUI = GameObject.FindGameObjectWithTag("Inventory");
-        inventoryUI.gameObject.SetActive(false);
+        inventoryUI.SetActive(false);
 
   
 

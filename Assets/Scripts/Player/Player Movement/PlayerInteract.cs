@@ -63,8 +63,8 @@ public class PlayerInteract : MonoBehaviour
 
                     if (Hit.collider.CompareTag("Rifle"))
                     {
-                        Destroy(Hit.collider.GetComponent<Item>().gameObject);
                         inventory.AddItem(item.item, AddRifleAmmo);
+                        Destroy(Hit.collider.GetComponent<Item>().gameObject);
                         collectedRifle = true;
 
                     }  

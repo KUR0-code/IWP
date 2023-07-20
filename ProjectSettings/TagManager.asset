@@ -16,6 +16,7 @@ TagManager:
   - Environment
   - Rifle
   - Pistol
+  - Waypoints_2
   layers:
   - Default
   - TransparentFX

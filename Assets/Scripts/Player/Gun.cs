@@ -63,6 +63,7 @@ public class Gun : MonoBehaviour
     public InventoryObject inventory;
 
     public PlayerInteract playerInteract;
+    int AmmoBuffer;
 
 
     private void PlaySFX1()
@@ -106,16 +107,32 @@ public class Gun : MonoBehaviour
             Recovering();
         }
 
-        if(playerInteract.collectedRifle)
+        if (playerInteract.collectedRifle && rapidFire) //Ar + Ar
         {
             totalAmmo += playerInteract.AddRifleAmmo;
             playerInteract.collectedRifle = false;
-        } 
-        else if(playerInteract.collectedPistol)
+        }
+        else if (playerInteract.collectedRifle && !rapidFire) // Ar + pistol
         {
-            totalAmmo += playerInteract.AddPistolAmmo;
+            Debug.Log("1");
+            GetComponent<WeaponSwitching>().GetPreviousWeapon().GetComponent<Gun>().totalAmmo += playerInteract.AddRifleAmmo;
+            playerInteract.collectedRifle = false;
+        }
+        else if (playerInteract.collectedPistol && rapidFire) // Pistol + Ar
+        {
+            Debug.Log("2");
+            GetComponent<WeaponSwitching>().GetNextWeapon().GetComponent<Gun>().totalAmmo += playerInteract.AddPistolAmmo;
+            //totalAmmo += playerInteract.AddPistolAmmo;
             playerInteract.collectedPistol = false;
         }
+        else if (playerInteract.collectedPistol && !rapidFire) //Pistol + Pistol
+        {
+            Debug.Log("3");
+            totalAmmo += playerInteract.AddPistolAmmo;
+            //totalAmmo += playerInteract.AddPistolAmmo;
+            playerInteract.collectedPistol = false;
+        }
+        
     }
 
     public void shoot()
@@ -227,14 +244,12 @@ public class Gun : MonoBehaviour
         {
             StartCoroutine(Reload());
         }
-
     }
     public IEnumerator Reload()
     {
         PlaySFX2();
         muzzleFlash.enabled = false;
-
-        int AmmoBuffer;
+        AmmoBuffer = 0;
 
         AmmoBuffer = maxAmmo - currentAmmo;
 

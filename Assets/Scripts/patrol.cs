@@ -14,6 +14,9 @@ public class patrol : StateMachineBehaviour
     Transform player;
     float chaseRange = 8;
     public bool isBoss;
+    public bool isFirstArea;
+    public bool isSecondArea;
+    public bool isThirdArea;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -21,9 +24,31 @@ public class patrol : StateMachineBehaviour
         agent = animator.GetComponent<NavMeshAgent>();
         agent.speed = 1.5f;
         time = 0;
-        if(!isBoss)
+        if(!isSecondArea && !isThirdArea &&!isBoss)
         {
             GameObject go = GameObject.FindGameObjectWithTag("Waypoints");
+
+            foreach (Transform t in go.transform)
+            {
+                wayPoints.Add(t);
+            }
+
+            agent.SetDestination(wayPoints[Random.Range(0, wayPoints.Count)].position);
+        }
+        else if(!isFirstArea && !isThirdArea && !isBoss )
+        {
+            GameObject go = GameObject.FindGameObjectWithTag("Waypoints_2");
+
+            foreach (Transform t in go.transform)
+            {
+                wayPoints.Add(t);
+            }
+
+            agent.SetDestination(wayPoints[Random.Range(0, wayPoints.Count)].position);
+        }
+        else if(!isFirstArea && !isSecondArea && !isBoss)
+        {
+            GameObject go = GameObject.FindGameObjectWithTag("Waypoints_3");
 
             foreach (Transform t in go.transform)
             {

@@ -15,29 +15,13 @@ public class PlayerMovement : MonoBehaviour
     private bool sprinting;
     private float crouchTimer;
 
-    public AudioSource Src;
+    public AudioSource WalkSrc;
+    public AudioSource RunSrc;
+    public AudioSource JumpSrc;
     public AudioClip WalkingSFX, JumpingSFX, RunningSFX;
-
-
-    private void WalkingSFXClip()
-    {
-        Src.clip = WalkingSFX;
-        Src.Play();
-    }
-
-    private void JumpingSFXClip()
-    {
-       
-        Src.clip = JumpingSFX;
-        Src.PlayDelayed(0.2f);
-    }
-    private void RunningSFXClip()
-    {
-        
-        Src.clip = RunningSFX;
-        Src.Play();
-    }
-
+    bool soundPlayed = false;
+    bool wasWalking;
+    bool wasRunning;
 
     // Start is called before the first frame update
     void Awake()
@@ -46,6 +30,9 @@ public class PlayerMovement : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        WalkSrc.clip = WalkingSFX;
+        JumpSrc.clip = JumpingSFX;
+        RunSrc.clip = RunningSFX;
     }
 
     // Update is called once per frame
@@ -80,25 +67,65 @@ public class PlayerMovement : MonoBehaviour
         moveDir.x = Input.x;
         moveDir.z = Input.y;
         controller.Move(speed * Time.deltaTime * transform.TransformDirection(moveDir));
-
         playerVelocity.y += gravity * Time.deltaTime;
+        if((Input.x > 0 || Input.y > 0) && isGrounded && speed == 5f) // walking
+        {
+            if(!soundPlayed)
+            {
+                WalkSrc.Play();
+                soundPlayed = true;
+            }
+        }
+        if((Input.x > 0 || Input.y > 0) && isGrounded && speed == 8f) // walking
+        {
+            if (!soundPlayed)
+            {
+                RunSrc.Play();
+                soundPlayed = true;
+            }
+        }
+       
         if (isGrounded && playerVelocity.y < 0)
         {
             playerVelocity.y = -2f;
         }
         if(!isGrounded && playerVelocity.y >0)
         {
-            JumpingSFXClip();
+            JumpSrc.PlayDelayed(0.1f);
+            if(wasWalking)
+            {
+                WalkSrc.Play();
+            }
+            else if (wasRunning)
+            {
+                RunSrc.Play();
+            }
+        }
+        if(Input.x == 0 && Input.y == 0 && isGrounded)
+        {
+            WalkSrc.Stop();
+            RunSrc.Stop();
+            soundPlayed = false;
         }
         controller.Move(playerVelocity * Time.deltaTime);
-        // WalkingSFXClip();
     }
 
     public void Jump()
     {
+        wasWalking = false;
+        wasRunning = false;
         if(isGrounded)
         {
             playerVelocity.y = Mathf.Sqrt(jumpHeight * -3.0f * gravity);
+
+            if(WalkSrc.isPlaying)
+            {
+                wasWalking = true;
+            }
+            else if(RunSrc.isPlaying)
+            {
+                wasRunning = true;
+            }
         }
     }
 
@@ -114,16 +141,15 @@ public class PlayerMovement : MonoBehaviour
         sprinting = !sprinting;
         if (sprinting)
         {
-            speed = 8;
-            Src.clip = RunningSFX;
-            Src.Play();
+            speed = 8f;
+            RunSrc.Play();
+            WalkSrc.Stop();
         }
         else
         {
-            Src.clip = RunningSFX;
-            Src.Stop();
-            WalkingSFXClip();
-            speed = 5;
+            RunSrc.Stop();
+            WalkSrc.Play();
+            speed = 5f;
         }
     }
     

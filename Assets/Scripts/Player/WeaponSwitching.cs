@@ -46,6 +46,11 @@ public class WeaponSwitching : MonoBehaviour
     {
         return transform.GetChild(selectedWeapon + 1);
     }
+    public Transform GetPreviousWeapon()
+    {
+        return transform.GetChild(selectedWeapon - 1);
+    }
+
     private void Update()
     {
         timeSinceLastSwitch += Time.deltaTime;
