@@ -28,8 +28,6 @@ public class InputManager : MonoBehaviour
 
     public GameObject player;
 
-    InventoryObject inventoryObject;
-
     public HealingPotion healingPotion;
 
     public InventoryObject inventory;
@@ -91,7 +89,7 @@ public class InputManager : MonoBehaviour
 
     private void HealPlayer()
     {
-        if(inventoryObject.RemoveHeal())
+        if(inventory.RemoveHeal())
         {
             player.GetComponent<PlayerHealth>().RestoreHealth(healingPotion.restoreHealthValue);
         }
