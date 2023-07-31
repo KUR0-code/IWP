@@ -18,6 +18,7 @@ public class InputManager : MonoBehaviour
     Coroutine fireCoroutine;
 
     public GameObject inventoryUI;
+    public GameObject inventoryImage;
     
     bool CursorToggle = false;
     bool toggle = false;
@@ -97,10 +98,17 @@ public class InputManager : MonoBehaviour
     {
         toggle = !toggle;
         if(toggle)
+        {
             inventoryUI.SetActive(true);
+            inventoryImage.SetActive(false);
+        }
+            
         else
+        {
             inventoryUI.SetActive(false);
-
+            inventoryImage.SetActive(true);
+        }
+          
     }
 
     private void UnlockCursor()
