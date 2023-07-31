@@ -17,8 +17,6 @@ public class InputManager : MonoBehaviour
 
     Coroutine fireCoroutine;
 
-    // public GameObject SettingUI;
-
     public GameObject inventoryUI;
     
     bool CursorToggle = false;

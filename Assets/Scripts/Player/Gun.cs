@@ -65,6 +65,8 @@ public class Gun : MonoBehaviour
     public PlayerInteract playerInteract;
     int AmmoBuffer;
 
+    bool HasAlreadyReloaded = false;
+
 
     private void PlaySFX1()
     {
@@ -247,28 +249,36 @@ public class Gun : MonoBehaviour
     }
     public IEnumerator Reload()
     {
-        PlaySFX2();
-        muzzleFlash.enabled = false;
-        AmmoBuffer = 0;
-
-        AmmoBuffer = maxAmmo - currentAmmo;
-
-        if(AmmoBuffer > 0 && totalAmmo >= AmmoBuffer)
+        if(HasAlreadyReloaded == false)
         {
-            print("reloading");
-            yield return reloadWait;
-            currentAmmo += AmmoBuffer;
-            totalAmmo -= AmmoBuffer;
-            print("Finish reloading");
+            PlaySFX2();
+            muzzleFlash.enabled = false;
+            AmmoBuffer = 0;
+
+            AmmoBuffer = maxAmmo - currentAmmo;
+
+            if (AmmoBuffer > 0 && totalAmmo >= AmmoBuffer)
+            {
+                HasAlreadyReloaded = true;
+                print("reloading");
+                yield return reloadWait;
+                currentAmmo += AmmoBuffer;
+                totalAmmo -= AmmoBuffer;
+                print("Finish reloading");
+                HasAlreadyReloaded = false;
+            }
+            else if (AmmoBuffer > 0 && totalAmmo <= AmmoBuffer)
+            {
+                HasAlreadyReloaded = true;
+                print("reloading");
+                yield return reloadWait;
+                currentAmmo += totalAmmo;
+                totalAmmo = 0;
+                print("Finish reloading");
+                HasAlreadyReloaded = false;
+            }
         }
-        else if(AmmoBuffer > 0 && totalAmmo <= AmmoBuffer)
-        {
-            print("reloading");
-            yield return reloadWait;
-            currentAmmo += totalAmmo;
-            totalAmmo = 0;
-            print("Finish reloading");
-        }
+        Debug.Log(HasAlreadyReloaded);
     }
 
     bool CanShoot()
