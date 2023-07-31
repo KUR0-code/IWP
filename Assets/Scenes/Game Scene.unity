@@ -5047,6 +5047,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &146259732 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4746983560859563988, guid: 2bf73fbaf558a2a47a117b8b11ddfe2a, type: 3}
+  m_PrefabInstance: {fileID: 4746983560983906623}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 146259686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 986da2a065e6bb240b33d7e9b9008fb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &152398581 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1073084092560794, guid: 695aa4942897a40e6a9b55f63cfbce2a, type: 3}
@@ -10829,6 +10840,7 @@ GameObject:
   - component: {fileID: 365018295}
   - component: {fileID: 365018294}
   - component: {fileID: 365018296}
+  - component: {fileID: 365018297}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -10966,6 +10978,21 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &365018297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 365018292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46dd32c47903b85499e0e74ced4a3a98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkingBobbingSpeed: 14
+  bobbingAmount: 0.05
+  player: {fileID: 146259732}
 --- !u!1 &367006416
 GameObject:
   m_ObjectHideFlags: 0
@@ -25838,40 +25865,6 @@ MonoBehaviour:
   hitEffect: {fileID: 100002, guid: f04e15e9b0b32f24b9e87868e8bfbeea, type: 3}
   died: 0
   Animator: {fileID: 1785454963}
---- !u!114 &824736712
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 824736710}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f40abd2a53785140a01e690138fc524, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHp: 100
-  CurrentHp: 0
-  hitEffect: {fileID: 100002, guid: f04e15e9b0b32f24b9e87868e8bfbeea, type: 3}
-  died: 0
-  Animator: {fileID: 0}
---- !u!114 &824736713
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 824736710}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f40abd2a53785140a01e690138fc524, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHp: 100
-  CurrentHp: 0
-  hitEffect: {fileID: 0}
-  died: 0
-  Animator: {fileID: 0}
 --- !u!1 &827949839 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1020046337380164, guid: 78196c2946aba40bcb735ee1782fd7dc, type: 3}
@@ -76402,7 +76395,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4999107168733169125, guid: 2bf73fbaf558a2a47a117b8b11ddfe2a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 16.509995
+      value: 14.44
       objectReference: {fileID: 0}
     - target: {fileID: 4999107168733169125, guid: 2bf73fbaf558a2a47a117b8b11ddfe2a, type: 3}
       propertyPath: m_LocalPosition.z

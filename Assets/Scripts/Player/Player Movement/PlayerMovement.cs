@@ -5,7 +5,11 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private CharacterController controller;
+    
     private Vector3 playerVelocity;
+
+    public Vector3 moveDir = Vector3.zero;
+
     public float speed = 5.0f;
     private bool isGrounded;
     public float gravity = -9.8f;
@@ -63,7 +67,6 @@ public class PlayerMovement : MonoBehaviour
     // Receive the input from the input manager script
     public void ProcessMoving(Vector2 Input)
     {
-        Vector3 moveDir = Vector3.zero;
         moveDir.x = Input.x;
         moveDir.z = Input.y;
         controller.Move(speed * Time.deltaTime * transform.TransformDirection(moveDir));
