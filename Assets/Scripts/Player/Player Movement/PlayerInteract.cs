@@ -13,6 +13,7 @@ public class PlayerInteract : MonoBehaviour
     private InputManager inputManager;
 
     public InventoryObject inventory;
+    public GameObject WeaponHolder;
 
     public int AddRifleAmmo;
     public int AddPistolAmmo;
@@ -59,6 +60,17 @@ public class PlayerInteract : MonoBehaviour
                         Hit.collider.GetComponent<Medkit>().BoxInteracted = true;
                         if(!Hit.collider.GetComponent<Medkit>().HasOpened)
                             inventory.AddItem(item.item, Hit.collider.GetComponent<Medkit>().count);
+                    }
+
+                    if (Hit.collider.CompareTag("Ammo_Boxes"))
+                    {
+                        Hit.collider.GetComponent<Ammo_Chest>().BoxInteracted = true;
+                        if (!Hit.collider.GetComponent<Ammo_Chest>().HasOpened)
+                        { 
+                            inventory.AddItem(item.item, Hit.collider.GetComponent<Ammo_Chest>().count);
+                            WeaponHolder.GetComponent<WeaponSwitching>().GetWeapon().GetComponent<Gun>().totalAmmo += Hit.collider.GetComponent<Ammo_Chest>().count;
+                        }
+                            
                     }
 
                     if (Hit.collider.CompareTag("Rifle"))

@@ -199,7 +199,7 @@ public class Gun : MonoBehaviour
 
     private void AmmoDropRange(Vector3 HitPosition)
     {
-        ammoDrop = Random.Range(1, 10);
+        ammoDrop = Random.Range(1, 5);
         switch (ammoDrop)
         {
             case 1:
@@ -239,11 +239,13 @@ public class Gun : MonoBehaviour
                     yield return rapidFireWait;
                     shoot();
                 }
+                 HasAlreadyReloaded = false;
                 StartCoroutine(Reload());
             }
         }
         else
         {
+             HasAlreadyReloaded = false;
             StartCoroutine(Reload());
         }
     }
