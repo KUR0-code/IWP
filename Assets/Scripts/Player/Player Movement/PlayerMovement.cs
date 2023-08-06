@@ -51,10 +51,12 @@ public class PlayerMovement : MonoBehaviour
             if(crouching)
             {
                 controller.height = Mathf.Lerp(controller.height, 1.3f, temp);
+                speed = 2f;
             }
             else
             {
                 controller.height = Mathf.Lerp(controller.height, 1.6f, temp);
+                speed = 5f;
             }
             if(temp > 1)
             {

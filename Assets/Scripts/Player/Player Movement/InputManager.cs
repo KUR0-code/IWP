@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
@@ -31,6 +33,9 @@ public class InputManager : MonoBehaviour
 
     public InventoryObject inventory;
     public displayInventory DisplayInventory;
+    public TextMeshProUGUI textDisplay;
+    public GameObject crosshair;
+    public Image image; 
 
 
     // Start is called before the first frame update
@@ -71,6 +76,8 @@ public class InputManager : MonoBehaviour
          weaponholder.GetComponent<WeaponSwitching>().GetNextWeapon().GetComponent<Gun>().GetComponent<Item>().item,
          weaponholder.GetComponent<WeaponSwitching>().GetNextWeapon().GetComponent<Gun>().maxAmmo +
          weaponholder.GetComponent<WeaponSwitching>().GetNextWeapon().GetComponent<Gun>().totalAmmo);
+
+        image = crosshair.GetComponent<Image>();
     }
     
     // Update is called once per frame
@@ -157,10 +164,16 @@ public class InputManager : MonoBehaviour
         if (FlashToggle)
         {
             flashLight.GetComponent<Light>().enabled = false;
+            textDisplay.color = Color.white;
+            image.color = Color.white;
             // Debug.Log("here");
         }
         else
+        {
             flashLight.GetComponent<Light>().enabled = true;
+            textDisplay.color = Color.black;
+            image.color = Color.black;
+        }
 
     }
 }

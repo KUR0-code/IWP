@@ -27,7 +27,6 @@ public class EnemyHealth : MonoBehaviour
 
     private void HasWon()
     {
-        
         if (isBoss && HealthBar.value <= 0)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);

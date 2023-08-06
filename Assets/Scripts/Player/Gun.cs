@@ -18,8 +18,7 @@ public class Gun : MonoBehaviour
     float fireRate = 5f;
     WaitForSeconds rapidFireWait;
 
-    [SerializeField]
-    bool rapidFire = false;
+    public bool rapidFire = false;
 
     public int maxAmmo;
     public int currentAmmo;
@@ -65,8 +64,9 @@ public class Gun : MonoBehaviour
     public PlayerInteract playerInteract;
     int AmmoBuffer;
 
-    bool HasAlreadyReloaded = false;
+    public bool HasAlreadyReloaded = false;
 
+    public WeaponSwitching weaponHolder;
 
     private void PlaySFX1()
     {
@@ -116,20 +116,17 @@ public class Gun : MonoBehaviour
         }
         else if (playerInteract.collectedRifle && !rapidFire) // Ar + pistol
         {
-            Debug.Log("1");
-            GetComponent<WeaponSwitching>().GetPreviousWeapon().GetComponent<Gun>().totalAmmo += playerInteract.AddRifleAmmo;
+            weaponHolder.GetPreviousWeapon().GetComponent<Gun>().totalAmmo += playerInteract.AddRifleAmmo;
             playerInteract.collectedRifle = false;
         }
         else if (playerInteract.collectedPistol && rapidFire) // Pistol + Ar
         {
-            Debug.Log("2");
-            GetComponent<WeaponSwitching>().GetNextWeapon().GetComponent<Gun>().totalAmmo += playerInteract.AddPistolAmmo;
+            weaponHolder.GetNextWeapon().GetComponent<Gun>().totalAmmo += playerInteract.AddPistolAmmo;
             //totalAmmo += playerInteract.AddPistolAmmo;
             playerInteract.collectedPistol = false;
         }
         else if (playerInteract.collectedPistol && !rapidFire) //Pistol + Pistol
         {
-            Debug.Log("3");
             totalAmmo += playerInteract.AddPistolAmmo;
             //totalAmmo += playerInteract.AddPistolAmmo;
             playerInteract.collectedPistol = false;
@@ -139,6 +136,7 @@ public class Gun : MonoBehaviour
 
     public void shoot()
     {
+        player.GetComponent<PlayerMovement>().speed = 2f;
         // the weapon the player is holding is a gun
         PlaySFX1();
         currentAmmo--;
@@ -300,6 +298,8 @@ public class Gun : MonoBehaviour
         yield return new WaitForSeconds(time);
         ShootingSystem.Stop();
         muzzleFlash.enabled = false;
+        player.GetComponent<PlayerMovement>().speed = 5f;
+
     }
 
     void Recoil()

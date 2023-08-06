@@ -62,10 +62,15 @@ public class WeaponSwitching : MonoBehaviour
         for (int i = 0; i < weapons.Length; i++)
         {
             if (i == weaponIndex)
+            {
                 transform.GetChild(i).gameObject.SetActive(true);
+                transform.GetChild(i).GetComponent<Gun>().HasAlreadyReloaded = false;
+            }
             else
+            {
                 transform.GetChild(i).gameObject.SetActive(false);
-
+                transform.GetChild(i).GetComponent<Gun>().HasAlreadyReloaded = false;
+            }
         }
         timeSinceLastSwitch = 0f;
 

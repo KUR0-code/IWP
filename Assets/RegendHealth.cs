@@ -13,7 +13,7 @@ public class RegendHealth : StateMachineBehaviour
     {
         Boss = GameObject.FindGameObjectWithTag("Boss");
         BossHealth = Boss.GetComponent<Damageable>().CurrentHp;
-        RegendHp = Boss.GetComponent<Damageable>().maxHp / 3;
+        RegendHp = Boss.GetComponent<Damageable>().maxHp / 4;
         Healed = false;
     }
 

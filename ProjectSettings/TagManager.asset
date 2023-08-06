@@ -18,6 +18,8 @@ TagManager:
   - Pistol
   - Waypoints_2
   - Ammo_Boxes
+  - Ar_Scavange
+  - Pistol_Scavange
   layers:
   - Default
   - TransparentFX
