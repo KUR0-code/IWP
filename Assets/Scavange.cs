@@ -10,7 +10,7 @@ public class Scavange : MonoBehaviour
     public WeaponSway weaponSway;
     public Slider Scavange_Bar;
     public WeaponSwitching weaponHolder;
-
+    public Bob bob;
     public TextMeshProUGUI textDisplay;
     float disappearTime;
     bool Archeck;
@@ -34,6 +34,7 @@ public class Scavange : MonoBehaviour
         player.GetComponent<PlayerMovement>().enabled = false;
         player.GetComponent<PlayerLook>().enabled = false;
         player.GetComponent<InputManager>().enabled = false;
+        bob.enabled = false;
         weaponSway.enabled = false;  
 
 
@@ -72,6 +73,7 @@ public class Scavange : MonoBehaviour
             player.GetComponent<PlayerMovement>().enabled = true;
             player.GetComponent<PlayerLook>().enabled = true;
             player.GetComponent<InputManager>().enabled = true;
+            bob.enabled = true;
             weaponSway.enabled = true;
         }
     }
