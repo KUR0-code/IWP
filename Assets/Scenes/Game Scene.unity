@@ -47981,6 +47981,7 @@ MonoBehaviour:
   weaponHolder: {fileID: 1398567996}
   bob: {fileID: 365018297}
   textDisplay: {fileID: 1521972157}
+  ScavangeObject: {fileID: 1109297882}
 --- !u!65 &1109297890
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -102635,6 +102636,7 @@ MonoBehaviour:
   weaponHolder: {fileID: 1398567996}
   bob: {fileID: 365018297}
   textDisplay: {fileID: 1521972157}
+  ScavangeObject: {fileID: 3967769295153255887}
 --- !u!1001 &8986486971864126047
 PrefabInstance:
   m_ObjectHideFlags: 0

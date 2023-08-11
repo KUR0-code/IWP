@@ -16,6 +16,8 @@ public class Scavange : MonoBehaviour
     bool Archeck;
     bool PistolCheck;
 
+    public GameObject ScavangeObject;
+
     private void Start()
     {
         textDisplay.color = new Color(textDisplay.color.r, textDisplay.color.g, textDisplay.color.b, 0);
@@ -139,7 +141,7 @@ public class Scavange : MonoBehaviour
             currentTime += Time.deltaTime;
             yield return null;
         }
-        gameObject.SetActive(false);
+        Destroy(ScavangeObject);
         yield break;
     }
 }
